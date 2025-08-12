@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://baj0qmviex86t"]
+
+[ext_resource type="ArrayMesh" uid="uid://fcj8tus28p7k" path="res://assets/tea_pot.obj" id="1_4opeh"]
+[ext_resource type="Script" uid="uid://8x8qt3op0wph" path="res://scripts/puzzle.gd" id="1_5ifmx"]
+[ext_resource type="ArrayMesh" uid="uid://wpecvx1trlvy" path="res://assets/elephant.obj" id="2_5ifmx"]
+[ext_resource type="Script" uid="uid://b3qgxjkwcaygn" path="res://scripts/tea_pot.gd" id="3_3asjn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3asjn"]
+
+[node name="Puzzle" type="Node3D"]
+script = ExtResource("1_5ifmx")
+
+[node name="TeaPot" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.999999, 1.52574e-09, 8.74095e-08, 0, 0.999848, -0.0174524, -8.74227e-08, -0.0174524, -0.999848, 0, 8.2, -4.483)
+gi_mode = 2
+mesh = ExtResource("1_4opeh")
+surface_material_override/0 = SubResource("StandardMaterial3D_3asjn")
+script = ExtResource("3_3asjn")
+
+[node name="Elephant" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.996712, 0.0810259, -0.000820956, -0.00765548, -0.104248, -0.994522, -0.0806676, -0.991245, 0.104525, 0.305128, 9.27204, -0.526618)
+visible = false
+mesh = ExtResource("2_5ifmx")
