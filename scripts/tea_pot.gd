@@ -2,10 +2,7 @@ extends MeshInstance3D
 
 signal piece_solved
 
-const TOLERANCE: float = 0.05
 var solved: bool = false
-
-const SOLUTION := Vector3(0.0, 3.12, 0.0)
 
 func _ready() -> void:
 	rotation_degrees = Vector3.ZERO
@@ -28,11 +25,18 @@ func check_piece_solution() -> void:
 		print("no, I'm currently at", rotation)
 	print("my position is ", position)
 
-func is_solved() -> bool:
-	var dx: float = _angle_diff_deg(rotation.x, SOLUTION.x)
-	var dy: float = _angle_diff_deg(rotation.y, SOLUTION.y)
-	var dz: float = _angle_diff_deg(rotation.z, SOLUTION.z)
+const ROTATION_RANGES := {
+	"x": {"min": -0.02, "max": 0.07},
+	"y": {"min": 3.10, "max": 3.13},
+	"z": {"min": -0.15, "max": 0.15}
+}
+const CENTER = Vector2(0.0, 8.2)
+const TOLERANCE = 0.5
 
-	return abs(dx) <= TOLERANCE \
-		and abs(dy) <= TOLERANCE \
-		and abs(dz) <= TOLERANCE
+func is_solved() -> bool:
+	var pos_2d := Vector2(position.x, position.y)
+	
+	return rotation.x >= ROTATION_RANGES["x"]["min"] and rotation.x <= ROTATION_RANGES["x"]["max"] \
+	and rotation.y >= ROTATION_RANGES["y"]["min"] and rotation.y <= ROTATION_RANGES["y"]["max"] \
+	and rotation.z >= ROTATION_RANGES["z"]["min"] and rotation.z <= ROTATION_RANGES["z"]["max"] \
+	and pos_2d.distance_to(CENTER) <= TOLERANCE

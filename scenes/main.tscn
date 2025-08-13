@@ -41,7 +41,7 @@ environment = SubResource("Environment_0wfyh")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62417, 0, -2.30254)
 
 [node name="CameraPivot" type="Node3D" parent="."]
-transform = Transform3D(0.990173, 0, -0.139847, 0, 1, 0, 0.139847, 0, 0.990173, 2.48072, 0.626751, 2.48315)
+transform = Transform3D(0.988291, 0.0616408, -0.139581, -0.0610351, 0.998098, 0.0086203, 0.139847, 0, 0.990173, 2.48072, 1.7486, 2.84338)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(-0.725687, -0.128923, 0.675838, -2.94856e-08, 0.982287, 0.187381, -0.688025, 0.13598, -0.712833, 4.74311, 9.7972, -9.93349)
