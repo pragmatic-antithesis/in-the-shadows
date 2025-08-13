@@ -1,19 +1,24 @@
 extends Area3D
 
-#TeaPot 1, -179 0
-#Elephanto 84 -0.5 -175.8
-
 const move_speed: float = 0.01
 const SPOT_CENTER = Vector2(2.6, 8.2)
 const SPOT_RADIUS = 5.0
-@onready var mesh_outline: MeshInstance3D = $Collision/Mesh/Outline
 var outline: StandardMaterial3D
+var selected: bool = false
+@onready var mesh_outline: MeshInstance3D = $Collision/Mesh/Outline
 
 func _ready() -> void:
 	mesh_outline.hide()
 	outline = mesh_outline.get_surface_override_material(0)
 
+func _on_input_event(_camera: Node, _event: InputEvent, _event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
+	if not selected and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		selected = true
+		outline.emission_energy_multiplier = 3.0
+		
 func _input(event: InputEvent) -> void:
+	if not selected: return
+	outline.emission_energy_multiplier = 3.0
 	var puzzle_piece: MeshInstance3D = $Collision/Mesh
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		if Input.is_action_pressed("vertical_rotate"):
@@ -34,6 +39,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and not event.pressed:
 		Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 		puzzle_piece.check_piece_solution()
+		_on_mouse_exited()
 
 
 func _get_clamped_move(piece: Node3D, move: Vector3) -> Vector3:
@@ -50,13 +56,6 @@ func _get_clamped_move(piece: Node3D, move: Vector3) -> Vector3:
 		return Vector3(clamped_move_2d.x, clamped_move_2d.y, move.z)
 	return move
 
-#func _on_input_event(_camera: Node, event: InputEvent, event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
-	#if event is InputEventMouse:
-		#mesh_outline.show()
-		
-#		var outline: StandardMaterial3D = mesh_outline.get_surface_override_material(0)
-#		outline.emission_energy_multiplier = 3.0
-		
 
 func _on_mouse_entered() -> void:
 	var tween: Tween = create_tween()
@@ -64,6 +63,9 @@ func _on_mouse_entered() -> void:
 	tween.tween_property(outline, "emission_energy_multiplier", 0.42, 0.3)
 
 func _on_mouse_exited() -> void:
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		return
+	selected = false
 	var tween: Tween = create_tween()
 	tween.tween_property(outline, "emission_energy_multiplier", 0.0, 0.2)
 	tween.tween_callback(Callable(mesh_outline, "hide"))

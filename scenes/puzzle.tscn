@@ -6,7 +6,7 @@
 [ext_resource type="Material" uid="uid://cgr7jfp4pui31" path="res://shaders/highlight.tres" id="4_3asjn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5ifmx"]
-size = Vector3(2.80949, 1.23096, 5.13813)
+size = Vector3(5.21886, 1.23096, 7.34337)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3asjn"]
 
@@ -29,7 +29,7 @@ _surfaces = [{
 script = ExtResource("1_5ifmx")
 
 [node name="Collision" type="CollisionShape3D" parent="TeaPot"]
-transform = Transform3D(-0.999999, 1.52575e-09, 8.74049e-08, 8.21194e-14, 0.999848, -0.0174525, -8.74181e-08, -0.0174525, -0.999848, -0.175682, 9.13693, -5.41516)
+transform = Transform3D(-0.999999, 1.52575e-09, 8.74049e-08, 8.21194e-14, 0.999848, -0.0174525, -8.74181e-08, -0.0174525, -0.999848, -0.609107, 9.13055, -5.78063)
 shape = SubResource("BoxShape3D_5ifmx")
 
 [node name="Mesh" type="MeshInstance3D" parent="TeaPot/Collision"]
@@ -45,5 +45,6 @@ cast_shadow = 0
 mesh = SubResource("ArrayMesh_3asjn")
 surface_material_override/0 = ExtResource("4_3asjn")
 
+[connection signal="input_event" from="TeaPot" to="TeaPot" method="_on_input_event"]
 [connection signal="mouse_entered" from="TeaPot" to="TeaPot" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="TeaPot" to="TeaPot" method="_on_mouse_exited"]
