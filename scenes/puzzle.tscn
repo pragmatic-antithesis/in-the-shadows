@@ -48,3 +48,4 @@ surface_material_override/0 = ExtResource("4_3asjn")
 [connection signal="input_event" from="TeaPot" to="TeaPot" method="_on_input_event"]
 [connection signal="mouse_entered" from="TeaPot" to="TeaPot" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="TeaPot" to="TeaPot" method="_on_mouse_exited"]
+[connection signal="piece_solved" from="TeaPot/Collision/Mesh" to="TeaPot" method="_on_mesh_piece_solved" binds= [Vector3(0, 0, 0), Vector3(0, 0, 0)]]

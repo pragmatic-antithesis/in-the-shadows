@@ -7,11 +7,6 @@ var solved: bool = false
 func _ready() -> void:
 	rotation = Vector3(0.0, -2.5, 0.0)
 
-func _input(_event: InputEvent) -> void:
-	if is_solved():
-		piece_solved.emit()
-		return
-
 func _angle_diff_deg(a: float, b: float) -> float:
 	var diff = fposmod(a - b, 360.0)
 	if diff > 180.0:
@@ -21,9 +16,9 @@ func _angle_diff_deg(a: float, b: float) -> float:
 func check_piece_solution() -> void:
 	if is_solved():
 		print("yes, my rotation is ", rotation)
+		piece_solved.emit()
 	else:
-		print("no, I'm currently at", rotation)
-	print("my position is ", position)
+		print("my position is ", position)
 
 const ROTATION_RANGES := {
 	"x": {"min": -0.02, "max": 0.07},

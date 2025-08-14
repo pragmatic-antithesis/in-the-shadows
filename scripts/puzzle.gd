@@ -5,6 +5,7 @@ const SPOT_CENTER = Vector2(2.6, 8.2)
 const SPOT_RADIUS = 5.0
 var outline: StandardMaterial3D
 var selected: bool = false
+var solved: bool = false
 @onready var mesh_outline: MeshInstance3D = $Collision/Mesh/Outline
 
 func _ready() -> void:
@@ -12,12 +13,13 @@ func _ready() -> void:
 	outline = mesh_outline.get_surface_override_material(0)
 
 func _on_input_event(_camera: Node, _event: InputEvent, _event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
+	if solved: return
 	if not selected and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		selected = true
 		outline.emission_energy_multiplier = 3.0
 		
 func _input(event: InputEvent) -> void:
-	if not selected: return
+	if solved or not selected: return
 	outline.emission_energy_multiplier = 3.0
 	var puzzle_piece: MeshInstance3D = $Collision/Mesh
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
@@ -56,16 +58,26 @@ func _get_clamped_move(piece: Node3D, move: Vector3) -> Vector3:
 		return Vector3(clamped_move_2d.x, clamped_move_2d.y, move.z)
 	return move
 
-
 func _on_mouse_entered() -> void:
+	if solved: return
 	var tween: Tween = create_tween()
 	mesh_outline.show()
 	tween.tween_property(outline, "emission_energy_multiplier", 0.42, 0.3)
 
 func _on_mouse_exited() -> void:
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+	if solved or Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		return
 	selected = false
 	var tween: Tween = create_tween()
 	tween.tween_property(outline, "emission_energy_multiplier", 0.0, 0.2)
+	tween.tween_callback(Callable(mesh_outline, "hide"))
+
+func _on_mesh_piece_solved(_extra_arg_0: Vector3, _extra_arg_1: Vector3) -> void:
+	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+	if solved: return
+	solved = true
+	var tween: Tween = create_tween()
+	mesh_outline.show()
+	tween.tween_property(mesh_outline, "scale", Vector3(1.03, 1.03, 1.03), 0.23)
+	tween.tween_property(outline, "emission_energy_multiplier", 3.42, 0.23)
 	tween.tween_callback(Callable(mesh_outline, "hide"))
