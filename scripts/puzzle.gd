@@ -72,15 +72,19 @@ func _on_mouse_exited() -> void:
 	tween.tween_property(outline, "emission_energy_multiplier", 0.0, 0.2)
 	tween.tween_callback(Callable(mesh_outline, "hide"))
 
-func _on_mesh_piece_solved(_extra_arg_0: Vector3, _extra_arg_1: Vector3) -> void:
+func _on_mesh_piece_solved(solved_position: Vector3, solved_rotation: Vector3) -> void:
 	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 	if solved: return
 	solved = true
 	var tween: Tween = create_tween()
 	mesh_outline.show()
+	$Collision/Mesh/AudioStreamPlayer.play()
 	const blink_duration: float = 0.2
 	const scale_up: float = 1.015
 	const scale_down: float = 1.001
+	var puzzle_piece: MeshInstance3D = $Collision/Mesh
+	tween.tween_property(puzzle_piece, "global_position", solved_position, 1.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(puzzle_piece, "rotation", solved_rotation, 1.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.parallel().tween_property(outline, "emission_energy_multiplier", 3.42, blink_duration * 1.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(mesh_outline, "scale", Vector3(scale_up, scale_up, scale_up), blink_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(mesh_outline, "scale", Vector3(scale_down, scale_down, scale_down), blink_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)

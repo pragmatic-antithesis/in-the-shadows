@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://baj0qmviex86t"]
+[gd_scene load_steps=9 format=4 uid="uid://baj0qmviex86t"]
 
 [ext_resource type="ArrayMesh" uid="uid://fcj8tus28p7k" path="res://assets/tea_pot.obj" id="1_4opeh"]
 [ext_resource type="Script" uid="uid://8x8qt3op0wph" path="res://scripts/puzzle.gd" id="1_5ifmx"]
 [ext_resource type="Script" uid="uid://b3qgxjkwcaygn" path="res://scripts/tea_pot.gd" id="3_3asjn"]
 [ext_resource type="Material" uid="uid://cgr7jfp4pui31" path="res://shaders/highlight.tres" id="4_3asjn"]
+[ext_resource type="AudioStream" uid="uid://i8d20few24hf" path="res://assets/glass_004.ogg" id="5_t8qc4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5ifmx"]
 size = Vector3(5.21886, 1.23096, 7.34337)
@@ -45,7 +46,10 @@ cast_shadow = 0
 mesh = SubResource("ArrayMesh_3asjn")
 surface_material_override/0 = ExtResource("4_3asjn")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TeaPot/Collision/Mesh"]
+stream = ExtResource("5_t8qc4")
+
 [connection signal="input_event" from="TeaPot" to="TeaPot" method="_on_input_event"]
 [connection signal="mouse_entered" from="TeaPot" to="TeaPot" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="TeaPot" to="TeaPot" method="_on_mouse_exited"]
-[connection signal="piece_solved" from="TeaPot/Collision/Mesh" to="TeaPot" method="_on_mesh_piece_solved" binds= [Vector3(0, 0, 0), Vector3(0, 0, 0)]]
+[connection signal="piece_solved" from="TeaPot/Collision/Mesh" to="TeaPot" method="_on_mesh_piece_solved"]

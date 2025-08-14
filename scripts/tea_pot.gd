@@ -13,19 +13,18 @@ func _angle_diff_deg(a: float, b: float) -> float:
 		diff -= 360.0
 	return diff
 
-func check_piece_solution() -> void:
-	if is_solved():
-		print("yes, my rotation is ", rotation)
-		piece_solved.emit()
-	else:
-		print("my position is ", position)
-
 const ROTATION_RANGES := {
 	"x": {"min": -0.02, "max": 0.07},
 	"y": {"min": -0.09, "max": 0.05},
 }
 const CENTER = Vector2(-0.17, -0.95)
 const TOLERANCE = 1.5
+const solved_position = Vector3(2.3, 8.27, -7.15)
+const solved_rotation = Vector3(0.0, 0.05, 0.0)
+
+func check_piece_solution() -> void:
+	if is_solved():
+		piece_solved.emit(solved_position, solved_rotation)
 
 func is_solved() -> bool:
 	var pos_2d := Vector2(position.x, position.y)
