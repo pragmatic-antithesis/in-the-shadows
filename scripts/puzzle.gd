@@ -80,8 +80,8 @@ func _on_mesh_piece_solved(_extra_arg_0: Vector3, _extra_arg_1: Vector3) -> void
 	mesh_outline.show()
 	const blink_duration: float = 0.2
 	const scale_up: float = 1.015
-	const scale_down: float = 0.97
-	tween.tween_property(outline, "emission_energy_multiplier", 3.42, blink_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	const scale_down: float = 1.001
+	tween.parallel().tween_property(outline, "emission_energy_multiplier", 3.42, blink_duration * 1.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(mesh_outline, "scale", Vector3(scale_up, scale_up, scale_up), blink_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	tween.tween_property(mesh_outline, "scale", Vector3(scale_down, scale_down, scale_down), blink_duration / 2.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	tween.tween_property(mesh_outline, "scale", Vector3(scale_down, scale_down, scale_down), blink_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	tween.tween_callback(Callable(mesh_outline, "hide"))
