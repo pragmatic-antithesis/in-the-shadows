@@ -16,11 +16,11 @@ func _on_input_event(_camera: Node, _event: InputEvent, _event_position: Vector3
 	if solved: return
 	if not selected and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		selected = true
-		outline.emission_energy_multiplier = 3.0
+		outline.emission_energy_multiplier = 1.42
 		
 func _input(event: InputEvent) -> void:
 	if solved or not selected: return
-	outline.emission_energy_multiplier = 3.0
+	outline.emission_energy_multiplier = 1.42
 	var puzzle_piece: MeshInstance3D = $Collision/Mesh
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		if Input.is_action_pressed("vertical_rotate"):
@@ -78,6 +78,10 @@ func _on_mesh_piece_solved(_extra_arg_0: Vector3, _extra_arg_1: Vector3) -> void
 	solved = true
 	var tween: Tween = create_tween()
 	mesh_outline.show()
-	tween.tween_property(mesh_outline, "scale", Vector3(1.03, 1.03, 1.03), 0.23)
-	tween.tween_property(outline, "emission_energy_multiplier", 3.42, 0.23)
+	const blink_duration: float = 0.2
+	const scale_up: float = 1.015
+	const scale_down: float = 0.97
+	tween.tween_property(outline, "emission_energy_multiplier", 3.42, blink_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(mesh_outline, "scale", Vector3(scale_up, scale_up, scale_up), blink_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(mesh_outline, "scale", Vector3(scale_down, scale_down, scale_down), blink_duration / 2.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	tween.tween_callback(Callable(mesh_outline, "hide"))
