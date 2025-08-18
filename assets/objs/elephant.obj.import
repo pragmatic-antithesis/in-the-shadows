@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://wpecvx1trlvy"
+path="res://.godot/imported/elephant.obj-776d02a6797cc466570638d5ebfb21cf.mesh"
+
+[deps]
+
+files=["res://.godot/imported/elephant.obj-776d02a6797cc466570638d5ebfb21cf.mesh"]
+
+source_file="res://assets/objs/elephant.obj"
+dest_files=["res://.godot/imported/elephant.obj-776d02a6797cc466570638d5ebfb21cf.mesh", "res://.godot/imported/elephant.obj-776d02a6797cc466570638d5ebfb21cf.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

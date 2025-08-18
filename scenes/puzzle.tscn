@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=4 uid="uid://baj0qmviex86t"]
 
-[ext_resource type="ArrayMesh" uid="uid://fcj8tus28p7k" path="res://assets/tea_pot.obj" id="1_4opeh"]
 [ext_resource type="Script" uid="uid://8x8qt3op0wph" path="res://scripts/puzzle.gd" id="1_5ifmx"]
+[ext_resource type="ArrayMesh" uid="uid://fcj8tus28p7k" path="res://assets/objs/tea_pot.obj" id="2_t8qc4"]
 [ext_resource type="Script" uid="uid://b3qgxjkwcaygn" path="res://scripts/tea_pot.gd" id="3_3asjn"]
 [ext_resource type="Material" uid="uid://cgr7jfp4pui31" path="res://shaders/highlight.tres" id="4_3asjn"]
-[ext_resource type="AudioStream" uid="uid://i8d20few24hf" path="res://assets/glass_004.ogg" id="5_t8qc4"]
+[ext_resource type="AudioStream" uid="uid://i8d20few24hf" path="res://assets/sounds/glass_004.ogg" id="5_wsi0i"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5ifmx"]
 size = Vector3(5.21886, 1.23096, 7.34337)
@@ -36,7 +36,7 @@ shape = SubResource("BoxShape3D_5ifmx")
 [node name="Mesh" type="MeshInstance3D" parent="TeaPot/Collision"]
 transform = Transform3D(1, 1.9984e-15, -4.59011e-12, -1.9984e-15, 1, 1.39698e-07, 4.59011e-12, -1.39698e-07, 1, -0.175682, -0.953053, -0.915663)
 gi_mode = 2
-mesh = ExtResource("1_4opeh")
+mesh = ExtResource("2_t8qc4")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_3asjn")
 script = ExtResource("3_3asjn")
@@ -47,7 +47,7 @@ mesh = SubResource("ArrayMesh_3asjn")
 surface_material_override/0 = ExtResource("4_3asjn")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TeaPot/Collision/Mesh"]
-stream = ExtResource("5_t8qc4")
+stream = ExtResource("5_wsi0i")
 
 [connection signal="input_event" from="TeaPot" to="TeaPot" method="_on_input_event"]
 [connection signal="mouse_entered" from="TeaPot" to="TeaPot" method="_on_mouse_entered"]

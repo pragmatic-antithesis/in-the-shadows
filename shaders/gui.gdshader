@@ -1,8 +1,10 @@
 shader_type canvas_item;
 
-uniform vec4 base_color: source_color = vec4(0.0, 0.0, 0.0, 0.7);
+uniform vec4 base_color: source_color = vec4(0.0, 0.0, 0.0, 0.75);
 uniform float aspect_ratio = 0.5;
-uniform float radius = 0.2;
+uniform float radius = 0.1;
+uniform float strength = 0.5;
+uniform float radius_dist = 0.1;
 uniform vec2 u_mouse = vec2(0.45, 0.44);
 
 void vertex() {
@@ -14,7 +16,9 @@ void fragment() {
 	vec2 scaledMouse = vec2(u_mouse.x, u_mouse.y * aspect_ratio);
 
     float d = distance(scaledUV, scaledMouse);
-    COLOR = (d < radius) ? vec4(0.0, 1.0, 0.0, 1.0) : vec4(1.0);
+	float fade = smoothstep(radius, radius * radius_dist, d);
+	float alpha = (d < radius) ? base_color.a - fade * strength : base_color.a;
+    COLOR = vec4(base_color.rgb, alpha);
 }
 //void light() {
 //	// Called for every pixel for every light affecting the CanvasItem.
