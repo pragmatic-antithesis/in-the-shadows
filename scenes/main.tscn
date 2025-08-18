@@ -125,20 +125,24 @@ size_flags_vertical = 8
 text = "MENU"
 
 [node name="GameTitle" type="RichTextLabel" parent="GUI"]
-show_behind_parent = true
+light_mask = 0
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_shadow_color = Color(0.880594, 0.928512, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 32
 theme_override_fonts/normal_font = ExtResource("4_jyhfs")
-theme_override_font_sizes/normal_font_size = 104
+theme_override_font_sizes/normal_font_size = 144
 bbcode_enabled = true
-text = "IN
-[color=red]THE[/color]
-SHADOWS"
+text = "[color=red]IN
+THE
+SHADOWS
+[/color]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
