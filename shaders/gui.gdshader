@@ -6,6 +6,7 @@ uniform float radius = 0.1;
 uniform float strength = 0.5;
 uniform float radius_dist = 0.1;
 uniform vec2 u_mouse = vec2(0.45, 0.44);
+uniform bool title_screen = true;
 
 void vertex() {
 	// Called for every vertex the material is visible on.
@@ -18,6 +19,8 @@ void fragment() {
     float d = distance(scaledUV, scaledMouse);
 	float fade = smoothstep(radius, radius * radius_dist, d);
 	float alpha = (d < radius) ? base_color.a - fade * strength : base_color.a;
+	if (title_screen)
+		alpha = 0.0;
     COLOR = vec4(base_color.rgb, alpha);
 }
 //void light() {

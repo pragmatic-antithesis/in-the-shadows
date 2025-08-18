@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://msf2i0xfisj7"]
+[gd_scene load_steps=12 format=3 uid="uid://msf2i0xfisj7"]
 
 [ext_resource type="PackedScene" uid="uid://baj0qmviex86t" path="res://scenes/puzzle.tscn" id="1_o5qli"]
 [ext_resource type="Shader" uid="uid://b3jnjdm0ud7wn" path="res://shaders/gui.gdshader" id="2_0wfyh"]
@@ -25,14 +25,17 @@ size = Vector3(20, 1, 25)
 lightmap_size_hint = Vector2i(129, 306)
 size = Vector3(24, 18, 1)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jyhfs"]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0wfyh"]
 shader = ExtResource("2_0wfyh")
-shader_parameter/base_color = Color(0, 0, 0, 0.9)
+shader_parameter/base_color = Color(0, 0, 0, 0.85)
 shader_parameter/aspect_ratio = 0.5
 shader_parameter/radius = 0.1
 shader_parameter/strength = 0.5
 shader_parameter/radius_dist = 0.1
 shader_parameter/u_mouse = Vector2(0.45, 0.44)
+shader_parameter/title_screen = true
 
 [node name="Main" type="Node3D"]
 
@@ -97,36 +100,18 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_sugp2")
 
-[node name="Canvas" type="CanvasLayer" parent="GUI"]
-process_priority = 1
-follow_viewport_enabled = true
+[node name="TitleCanvas" type="CanvasLayer" parent="GUI"]
 
-[node name="AlphaTint" type="ColorRect" parent="GUI/Canvas"]
-z_index = 1
-material = SubResource("ShaderMaterial_0wfyh")
+[node name="TitleScreen" type="ColorRect" parent="GUI/TitleCanvas"]
+material = SubResource("CanvasItemMaterial_jyhfs")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.462291, 0.462291, 0.462291, 1)
 
-[node name="Menu" type="VBoxContainer" parent="GUI/Canvas"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -74.0
-offset_bottom = 40.0
-grow_horizontal = 0
-
-[node name="MenuButton" type="MenuButton" parent="GUI/Canvas/Menu"]
-layout_mode = 2
-size_flags_vertical = 8
-text = "MENU"
-
-[node name="GameTitle" type="RichTextLabel" parent="GUI"]
+[node name="GameTitle" type="RichTextLabel" parent="GUI/TitleCanvas"]
 light_mask = 0
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -137,7 +122,7 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
 theme_override_constants/shadow_outline_size = 32
 theme_override_fonts/normal_font = ExtResource("4_jyhfs")
-theme_override_font_sizes/normal_font_size = 144
+theme_override_font_sizes/normal_font_size = 112
 bbcode_enabled = true
 text = "[color=red]IN
 THE
@@ -146,4 +131,31 @@ SHADOWS
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="gui_input" from="GUI/Canvas/AlphaTint" to="GUI" method="_on_color_rect_gui_input"]
+[node name="MenuCanvas" type="CanvasLayer" parent="GUI"]
+process_priority = 1
+follow_viewport_enabled = true
+
+[node name="AlphaTint" type="ColorRect" parent="GUI/MenuCanvas"]
+z_index = 1
+material = SubResource("ShaderMaterial_0wfyh")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.462291, 0.462291, 0.462291, 1)
+
+[node name="Menu" type="VBoxContainer" parent="GUI/MenuCanvas"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -74.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="MenuButton" type="MenuButton" parent="GUI/MenuCanvas/Menu"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "MENU"
+
+[connection signal="gui_input" from="GUI/MenuCanvas/AlphaTint" to="GUI" method="_on_alpha_tint_gui_input"]
