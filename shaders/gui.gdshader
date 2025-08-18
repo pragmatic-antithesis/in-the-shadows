@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-uniform vec4 base_color: source_color = vec4(0.0, 0.0, 0.0, 0.75);
+uniform vec4 base_color: source_color = vec4(0.0, 0.0, 0.0, 0.90);
 uniform float aspect_ratio = 0.5;
 uniform float radius = 0.1;
 uniform float strength = 0.5;
