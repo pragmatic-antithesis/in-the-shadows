@@ -2,7 +2,7 @@ shader_type canvas_item;
 
 uniform float steepness = 10.0;
 uniform vec2 mouse_pos = vec2(0.5, 0.5);
-uniform float gradient_radius = 1.0;
+uniform float gradient_radius = 0.75;
 uniform float aspect_ratio = 0.5;
 
 float rationalBump(float x, float k) {
