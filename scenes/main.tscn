@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://msf2i0xfisj7"]
+[gd_scene load_steps=13 format=3 uid="uid://msf2i0xfisj7"]
 
 [ext_resource type="PackedScene" uid="uid://baj0qmviex86t" path="res://scenes/puzzle.tscn" id="1_o5qli"]
 [ext_resource type="Shader" uid="uid://b3jnjdm0ud7wn" path="res://shaders/gui.gdshader" id="2_0wfyh"]
 [ext_resource type="Script" uid="uid://blbkhgtq0rlci" path="res://scripts/gui.gd" id="2_sugp2"]
+[ext_resource type="Shader" uid="uid://yq7ognogbb5i" path="res://shaders/title.gdshader" id="3_tbgi4"]
 [ext_resource type="FontFile" uid="uid://crulpu8yy2h4d" path="res://assets/fonts/BigBlueTermPlusNerdFont-Regular.ttf" id="4_jyhfs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o5qli"]
@@ -25,7 +26,12 @@ size = Vector3(20, 1, 25)
 lightmap_size_hint = Vector2i(129, 306)
 size = Vector3(24, 18, 1)
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jyhfs"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tefeu"]
+shader = ExtResource("3_tbgi4")
+shader_parameter/steepness = 10.0
+shader_parameter/mouse_pos = Vector2(0.5, 0.5)
+shader_parameter/gradient_radius = 1.0
+shader_parameter/aspect_ratio = 0.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0wfyh"]
 shader = ExtResource("2_0wfyh")
@@ -103,7 +109,7 @@ script = ExtResource("2_sugp2")
 [node name="TitleCanvas" type="CanvasLayer" parent="GUI"]
 
 [node name="TitleScreen" type="ColorRect" parent="GUI/TitleCanvas"]
-material = SubResource("CanvasItemMaterial_jyhfs")
+material = SubResource("ShaderMaterial_tefeu")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

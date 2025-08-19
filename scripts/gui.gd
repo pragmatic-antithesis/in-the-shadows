@@ -20,5 +20,6 @@ func _on_alpha_tint_gui_input(event: InputEvent) -> void:
 		var uv_mouse: Vector2 = get_local_mouse_position() / size
 		menu_background.set_shader_parameter("u_mouse", uv_mouse)
 		var dir: Vector2 = (uv_mouse - Vector2(0.5, 0.5)) * 2.0
-		title.add_theme_constant_override("shadow_offset_x", int(dir.x * MAX_OFFSET))
-		title.add_theme_constant_override("shadow_offset_y", int(dir.y * MAX_OFFSET))
+		title.add_theme_constant_override("shadow_offset_x", int(-dir.x * MAX_OFFSET))
+		title.add_theme_constant_override("shadow_offset_y", int(-dir.y * MAX_OFFSET))
+		$TitleCanvas/TitleScreen.material.set_shader_parameter("mouse_pos", uv_mouse)
