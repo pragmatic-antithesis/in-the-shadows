@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://msf2i0xfisj7"]
+[gd_scene load_steps=21 format=3 uid="uid://msf2i0xfisj7"]
 
 [ext_resource type="PackedScene" uid="uid://baj0qmviex86t" path="res://scenes/puzzle.tscn" id="1_o5qli"]
 [ext_resource type="Shader" uid="uid://b3jnjdm0ud7wn" path="res://shaders/gui.gdshader" id="2_0wfyh"]
@@ -28,13 +28,6 @@ size = Vector3(20, 1, 25)
 lightmap_size_hint = Vector2i(129, 306)
 size = Vector3(24, 18, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tefeu"]
-shader = ExtResource("3_tbgi4")
-shader_parameter/steepness = 10.0
-shader_parameter/mouse_pos = Vector2(0.5, 0.5)
-shader_parameter/gradient_radius = 0.75
-shader_parameter/aspect_ratio = 0.5
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0wfyh"]
 shader = ExtResource("2_0wfyh")
 shader_parameter/base_color = Color(0, 0, 0, 0.85)
@@ -43,7 +36,110 @@ shader_parameter/radius = 0.1
 shader_parameter/strength = 0.5
 shader_parameter/radius_dist = 0.1
 shader_parameter/u_mouse = Vector2(0.45, 0.44)
-shader_parameter/disable_darkening = true
+shader_parameter/disable_darkening = false
+shader_parameter/rect_center = Vector2(0.5, 0.5)
+shader_parameter/rect_size = Vector2(0.085, 0.18)
+shader_parameter/edge_softness = 0.05
+shader_parameter/edge_sharpness = 0.015
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_choun"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 1, 1, 0.705882)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o6xl0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6xl0"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tipki"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_85g3d"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.929715, 0.929715, 0.929715, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 2
+
+[sub_resource type="Theme" id="Theme_o6xl0"]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_disabled_color = Color(1, 1, 1, 0.705882)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0.0807833, 0.0807834, 0.0807833, 1)
+Button/constants/outline_size = 12
+Button/font_sizes/font_size = 48
+Button/styles/disabled = SubResource("StyleBoxFlat_choun")
+Button/styles/focus = SubResource("StyleBoxEmpty_o6xl0")
+Button/styles/hover = SubResource("StyleBoxFlat_o6xl0")
+Button/styles/normal = SubResource("StyleBoxFlat_tipki")
+Button/styles/pressed = SubResource("StyleBoxFlat_85g3d")
+CodeEdit/constants/outline_size = -1
+GraphFrameTitleLabel/colors/font_outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tefeu"]
+shader = ExtResource("3_tbgi4")
+shader_parameter/steepness = 10.0
+shader_parameter/mouse_pos = Vector2(0.5, 0.5)
+shader_parameter/gradient_radius = 0.75
+shader_parameter/aspect_ratio = 0.5
 
 [node name="Main" type="Node3D"]
 
@@ -108,9 +204,124 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_sugp2")
 
-[node name="TitleCanvas" type="CanvasLayer" parent="GUI"]
+[node name="MenuCanvas" type="CanvasLayer" parent="GUI"]
+process_priority = 1
+follow_viewport_enabled = true
 
-[node name="TitleScreen" type="ColorRect" parent="GUI/TitleCanvas"]
+[node name="AlphaTint" type="ColorRect" parent="GUI/MenuCanvas"]
+z_index = 1
+material = SubResource("ShaderMaterial_0wfyh")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.462291, 0.462291, 0.462291, 1)
+
+[node name="Buttons" type="Node" parent="GUI/MenuCanvas"]
+
+[node name="StartMenu" type="VBoxContainer" parent="GUI/MenuCanvas/Buttons"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -134.5
+offset_top = -163.0
+offset_right = 134.5
+offset_bottom = 163.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Continue" type="Button" parent="GUI/MenuCanvas/Buttons/StartMenu"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = SubResource("Theme_o6xl0")
+text = "Continue"
+icon_alignment = 1
+
+[node name="NewGame" type="Button" parent="GUI/MenuCanvas/Buttons/StartMenu"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = SubResource("Theme_o6xl0")
+text = "New Game"
+icon_alignment = 1
+
+[node name="TestMode" type="Button" parent="GUI/MenuCanvas/Buttons/StartMenu"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = SubResource("Theme_o6xl0")
+text = "Test Mode"
+icon_alignment = 1
+
+[node name="LevelSelect" type="VBoxContainer" parent="GUI/MenuCanvas/Buttons"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -134.5
+offset_top = -140.0
+offset_right = 134.5
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Puzzle1" type="Button" parent="GUI/MenuCanvas/Buttons/LevelSelect"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = SubResource("Theme_o6xl0")
+theme_override_font_sizes/font_size = 36
+disabled = true
+text = "It's five o'clock"
+icon_alignment = 1
+
+[node name="Puzzle2" type="Button" parent="GUI/MenuCanvas/Buttons/LevelSelect"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = SubResource("Theme_o6xl0")
+theme_override_font_sizes/font_size = 36
+disabled = true
+text = "I remember"
+icon_alignment = 1
+
+[node name="Puzzle3" type="Button" parent="GUI/MenuCanvas/Buttons/LevelSelect"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = SubResource("Theme_o6xl0")
+theme_override_font_sizes/font_size = 36
+disabled = true
+text = "Spin and point"
+icon_alignment = 1
+
+[node name="Puzzle4" type="Button" parent="GUI/MenuCanvas/Buttons/LevelSelect"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = SubResource("Theme_o6xl0")
+theme_override_font_sizes/font_size = 36
+disabled = true
+text = "The answer"
+icon_alignment = 1
+
+[node name="CallMenu" type="Button" parent="GUI/MenuCanvas/Buttons"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -83.0
+offset_bottom = 50.0
+grow_horizontal = 0
+mouse_default_cursor_shape = 2
+theme = SubResource("Theme_o6xl0")
+theme_override_font_sizes/font_size = 24
+text = "Menu"
+icon_alignment = 1
+
+[node name="TitleCanvas" type="CanvasLayer" parent="GUI/MenuCanvas"]
+visible = false
+
+[node name="TitleScreen" type="ColorRect" parent="GUI/MenuCanvas/TitleCanvas"]
 material = SubResource("ShaderMaterial_tefeu")
 anchors_preset = 15
 anchor_right = 1.0
@@ -118,7 +329,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GameTitle" type="RichTextLabel" parent="GUI/TitleCanvas"]
+[node name="GameTitle" type="RichTextLabel" parent="GUI/MenuCanvas/TitleCanvas"]
 light_mask = 0
 anchors_preset = 15
 anchor_right = 1.0
@@ -141,7 +352,7 @@ SHADOWS
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="GUI/TitleCanvas"]
+[node name="Label" type="Label" parent="GUI/MenuCanvas/TitleCanvas"]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -160,51 +371,38 @@ pour l'école 42"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="MenuCanvas" type="CanvasLayer" parent="GUI"]
-process_priority = 1
-follow_viewport_enabled = true
-
-[node name="AlphaTint" type="ColorRect" parent="GUI/MenuCanvas"]
-z_index = 1
-material = SubResource("ShaderMaterial_0wfyh")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.462291, 0.462291, 0.462291, 1)
-
-[node name="Menu" type="BoxContainer" parent="GUI/MenuCanvas"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -74.0
-offset_bottom = 40.0
-grow_horizontal = 0
-
-[node name="MenuButton" type="MenuButton" parent="GUI/MenuCanvas/Menu"]
-layout_mode = 2
-size_flags_vertical = 8
-text = "MENU"
-
-[node name="StartGame" type="Button" parent="GUI/MenuCanvas"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -91.0
-offset_top = -158.0
-offset_right = 91.0
-offset_bottom = -86.0
+[node name="StartGame" type="Button" parent="GUI/MenuCanvas/TitleCanvas"]
+anchors_preset = -1
+anchor_left = 0.364583
+anchor_top = 0.756173
+anchor_right = 0.635417
+anchor_bottom = 0.867284
+offset_left = 65.0
+offset_right = -65.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_colors/font_hover_color = Color(0, 0, 0, 0.588235)
+mouse_default_cursor_shape = 2
+theme_override_colors/font_hover_color = Color(0.164706, 0.164706, 0.164706, 0.392157)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_o6xl0")
 theme_override_font_sizes/font_size = 48
-text = "Start"
+text = "Start Game"
 flat = true
+metadata/_edit_use_anchors_ = true
 
-[connection signal="gui_input" from="GUI/MenuCanvas/AlphaTint" to="GUI" method="_on_alpha_tint_gui_input"]
-[connection signal="pressed" from="GUI/MenuCanvas/StartGame" to="GUI" method="_on_start_game_pressed"]
+[connection signal="gui_input" from="GUI/MenuCanvas/AlphaTint" to="GUI" method="_on_menu_gui_input"]
+[connection signal="gui_input" from="GUI/MenuCanvas/Buttons/StartMenu" to="GUI" method="_on_menu_gui_input"]
+[connection signal="gui_input" from="GUI/MenuCanvas/Buttons/StartMenu/Continue" to="GUI" method="_on_menu_gui_input"]
+[connection signal="pressed" from="GUI/MenuCanvas/Buttons/StartMenu/Continue" to="GUI" method="_on_start_menu_pressed" binds= [0]]
+[connection signal="gui_input" from="GUI/MenuCanvas/Buttons/StartMenu/NewGame" to="GUI" method="_on_menu_gui_input"]
+[connection signal="pressed" from="GUI/MenuCanvas/Buttons/StartMenu/NewGame" to="GUI" method="_on_start_menu_pressed" binds= [1]]
+[connection signal="gui_input" from="GUI/MenuCanvas/Buttons/StartMenu/TestMode" to="GUI" method="_on_menu_gui_input"]
+[connection signal="pressed" from="GUI/MenuCanvas/Buttons/StartMenu/TestMode" to="GUI" method="_on_start_menu_pressed" binds= [2]]
+[connection signal="gui_input" from="GUI/MenuCanvas/Buttons/LevelSelect/Puzzle1" to="GUI" method="_on_menu_gui_input"]
+[connection signal="gui_input" from="GUI/MenuCanvas/Buttons/LevelSelect/Puzzle2" to="GUI" method="_on_menu_gui_input"]
+[connection signal="gui_input" from="GUI/MenuCanvas/Buttons/LevelSelect/Puzzle3" to="GUI" method="_on_menu_gui_input"]
+[connection signal="gui_input" from="GUI/MenuCanvas/Buttons/LevelSelect/Puzzle4" to="GUI" method="_on_menu_gui_input"]
+[connection signal="gui_input" from="GUI/MenuCanvas/Buttons/CallMenu" to="GUI" method="_on_menu_gui_input"]
+[connection signal="gui_input" from="GUI/MenuCanvas/TitleCanvas/GameTitle" to="GUI" method="_on_game_title_gui_input"]
+[connection signal="gui_input" from="GUI/MenuCanvas/TitleCanvas/StartGame" to="GUI" method="_on_game_title_gui_input"]
+[connection signal="pressed" from="GUI/MenuCanvas/TitleCanvas/StartGame" to="GUI" method="_on_start_game_pressed"]
