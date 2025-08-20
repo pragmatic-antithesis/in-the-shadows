@@ -43,7 +43,7 @@ shader_parameter/radius = 0.1
 shader_parameter/strength = 0.5
 shader_parameter/radius_dist = 0.1
 shader_parameter/u_mouse = Vector2(0.45, 0.44)
-shader_parameter/title_screen = true
+shader_parameter/disable_darkening = true
 
 [node name="Main" type="Node3D"]
 
@@ -125,17 +125,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_outline_color = Color(1, 1, 0, 1)
+theme_override_colors/default_color = Color(0.0728426, 0.0728426, 0.0728426, 1)
+theme_override_colors/font_outline_color = Color(0.868985, 0.868985, 0.868985, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
 theme_override_constants/shadow_outline_size = 32
 theme_override_fonts/normal_font = ExtResource("4_jyhfs")
 theme_override_font_sizes/normal_font_size = 112
 bbcode_enabled = true
-text = "[color=red]IN
+text = "IN
 THE
 SHADOWS
-[/color]
+
 "
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -159,25 +160,6 @@ pour l'école 42"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="Button" type="Button" parent="GUI/TitleCanvas"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -206.0
-offset_top = 156.0
-offset_right = 206.0
-offset_bottom = 228.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_hover_color = Color(0, 0, 0, 0.588235)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_o6xl0")
-theme_override_font_sizes/font_size = 48
-text = "Start Game"
-flat = true
-
 [node name="MenuCanvas" type="CanvasLayer" parent="GUI"]
 process_priority = 1
 follow_viewport_enabled = true
@@ -192,7 +174,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.462291, 0.462291, 0.462291, 1)
 
-[node name="Menu" type="VBoxContainer" parent="GUI/MenuCanvas"]
+[node name="Menu" type="BoxContainer" parent="GUI/MenuCanvas"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -205,4 +187,24 @@ layout_mode = 2
 size_flags_vertical = 8
 text = "MENU"
 
+[node name="StartGame" type="Button" parent="GUI/MenuCanvas"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -91.0
+offset_top = -158.0
+offset_right = 91.0
+offset_bottom = -86.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 0.588235)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_o6xl0")
+theme_override_font_sizes/font_size = 48
+text = "Start"
+flat = true
+
 [connection signal="gui_input" from="GUI/MenuCanvas/AlphaTint" to="GUI" method="_on_alpha_tint_gui_input"]
+[connection signal="pressed" from="GUI/MenuCanvas/StartGame" to="GUI" method="_on_start_game_pressed"]
