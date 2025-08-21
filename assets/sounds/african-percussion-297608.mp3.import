@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/african-percussion-297608.mp3-f49a7cc063637f9
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0
