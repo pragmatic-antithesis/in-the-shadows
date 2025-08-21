@@ -78,7 +78,6 @@ func _on_mesh_piece_solved(solved_position: Vector3, solved_rotation: Vector3) -
 	solved = true
 	var tween: Tween = create_tween()
 	mesh_outline.show()
-	$Collision/Mesh/AudioStreamPlayer.play()
 	const blink_duration: float = 0.2
 	const scale_up: float = 1.015
 	const scale_down: float = 1.001

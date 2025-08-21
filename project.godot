@@ -15,6 +15,10 @@ run/main_scene="uid://msf2i0xfisj7"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+AudioPlayer="*res://scenes/audio_stream.tscn"
+
 [gui]
 
 theme/default_font_multichannel_signed_distance_field=true

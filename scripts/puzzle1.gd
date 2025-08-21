@@ -24,6 +24,7 @@ const solved_rotation = Vector3(0.0, 0.05, 0.0)
 
 func check_piece_solution() -> void:
 	if is_solved():
+		AudioPlayer.play_sfx("puzzle1")
 		piece_solved.emit(solved_position, solved_rotation)
 
 func is_solved() -> bool:

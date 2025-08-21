@@ -4,7 +4,7 @@
 [ext_resource type="ArrayMesh" uid="uid://wpecvx1trlvy" path="res://assets/objs/elephant.obj" id="2_ktcv2"]
 [ext_resource type="Script" uid="uid://b3qgxjkwcaygn" path="res://scripts/puzzle1.gd" id="3_4a2p6"]
 [ext_resource type="Material" uid="uid://cgr7jfp4pui31" path="res://shaders/highlight.tres" id="4_cmli7"]
-[ext_resource type="AudioStream" uid="uid://i8d20few24hf" path="res://assets/sounds/glass_004.ogg" id="5_xrife"]
+[ext_resource type="AudioStream" uid="uid://b0vfkjwlntscf" path="res://assets/sounds/gajah-220044.mp3" id="5_6e5t8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5ifmx"]
 size = Vector3(5.21886, 1.23096, 7.34337)
@@ -47,7 +47,7 @@ mesh = SubResource("ArrayMesh_6e5t8")
 surface_material_override/0 = ExtResource("4_cmli7")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MainMesh/Collision/Mesh"]
-stream = ExtResource("5_xrife")
+stream = ExtResource("5_6e5t8")
 
 [connection signal="input_event" from="MainMesh" to="MainMesh" method="_on_input_event"]
 [connection signal="mouse_entered" from="MainMesh" to="MainMesh" method="_on_mouse_entered"]

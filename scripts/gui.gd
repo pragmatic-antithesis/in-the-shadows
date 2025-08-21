@@ -22,6 +22,7 @@ const MAX_LEVEL: int = 4
 @onready var call_menu: Button = $MenuCanvas/Buttons/CallMenu
 
 func _ready() -> void:
+	AudioPlayer.play_music("menu", 2.0)
 	menu_background.set_shader_parameter("aspect_ratio", size.y / size.x)
 
 func _on_menu_gui_input(event: InputEvent) -> void:
