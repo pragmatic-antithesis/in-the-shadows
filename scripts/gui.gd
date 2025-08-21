@@ -75,6 +75,7 @@ func _on_call_menu_pressed() -> void:
 
 #Title Canvas
 func _on_start_game_pressed() -> void:
+	AudioPlayer.play_music("selection")
 	for child in title_canvas.get_children():
 		child.queue_free()
 	title_canvas.queue_free()

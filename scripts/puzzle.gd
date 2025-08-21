@@ -82,6 +82,7 @@ func _on_mesh_piece_solved(solved_position: Vector3, solved_rotation: Vector3) -
 	const scale_up: float = 1.015
 	const scale_down: float = 1.001
 	var puzzle_piece: MeshInstance3D = $Collision/Mesh
+	print("pos: ",  puzzle_piece.global_position)
 	tween.tween_property(puzzle_piece, "global_position", solved_position, 1.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.parallel().tween_property(puzzle_piece, "rotation", solved_rotation, 1.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.parallel().tween_property(outline, "emission_energy_multiplier", 3.42, blink_duration * 1.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)

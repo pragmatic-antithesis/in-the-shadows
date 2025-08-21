@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://8x8qt3op0wph" path="res://scripts/puzzle.gd" id="1_7pooc"]
 [ext_resource type="ArrayMesh" uid="uid://wpecvx1trlvy" path="res://assets/objs/elephant.obj" id="2_ktcv2"]
-[ext_resource type="Script" uid="uid://b3qgxjkwcaygn" path="res://scripts/puzzle1.gd" id="3_4a2p6"]
+[ext_resource type="Script" uid="uid://dvfo2kgk3str2" path="res://scripts/puzzle2.gd" id="3_6e5t8"]
 [ext_resource type="Material" uid="uid://cgr7jfp4pui31" path="res://shaders/highlight.tres" id="4_cmli7"]
 [ext_resource type="AudioStream" uid="uid://b0vfkjwlntscf" path="res://assets/sounds/gajah-220044.mp3" id="5_6e5t8"]
 
@@ -39,7 +39,7 @@ gi_mode = 2
 mesh = ExtResource("2_ktcv2")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_3asjn")
-script = ExtResource("3_4a2p6")
+script = ExtResource("3_6e5t8")
 
 [node name="Outline" type="MeshInstance3D" parent="MainMesh/Collision/Mesh"]
 transform = Transform3D(1, 1.11022e-16, 7.10543e-15, 0, 1, 0, -7.10543e-15, 0, 1, 0, 0, 0)
