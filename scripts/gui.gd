@@ -13,6 +13,10 @@ const MAX_OFFSET: float = 18.0
 @onready var title_screen: ColorRect = $MenuCanvas/TitleCanvas/TitleScreen
 @onready var game_title: RichTextLabel = $MenuCanvas/TitleCanvas/GameTitle
 
+#Puzzle Complete#
+@onready var puzzle_complete: CanvasLayer = $MenuCanvas/PuzzleComplete
+@onready var congrats_message: Label = $MenuCanvas/PuzzleComplete/Message
+
 #Buttons#
 enum StartOption{ CONTINUE, NEW, TEST }
 const MENU_START_SHADER_ALPHA: Vector2 = Vector2(0.085, 0.18)
@@ -37,8 +41,8 @@ func _load_scene(scene_path: String) -> void:
 	var scene: PackedScene = load(scene_path)
 	if scene:
 		current_scene = scene.instantiate()
-		if current_scene.get_child(0) is BasePuzzle:
-			current_scene.get_child(0).puzzle_solved.connect(_on_puzzle_solved)
+		if current_scene is BasePuzzle:
+			current_scene.puzzle_solved.connect(_on_puzzle_solved)
 			puzzle_interface.add_child(current_scene)
 		else:
 			push_error("Loaded scene is not a Base Puzzle")
@@ -103,4 +107,19 @@ func _on_game_title_gui_input(event: InputEvent) -> void:
 		title_screen.material.set_shader_parameter("mouse_pos", uv_mouse)
 
 func _on_puzzle_solved() -> void:
-	print("plim")
+	puzzle_complete.show()
+	_start_pulsing()
+
+func _start_pulsing(outline_size: float = 4.0, pulse_speed: float = 1.0):
+
+	var tween = create_tween()
+	tween.set_loops()  # Loop forever
+
+	# Pulse between minimum and maximum outline size
+	tween.tween_method(_pulse_outline, 1.0, outline_size, pulse_speed)
+	tween.tween_method(_pulse_outline, outline_size, 1.0, pulse_speed)
+
+func _pulse_outline(size: float):
+	congrats_message.add_theme_constant_override("outline_size", int(size))
+# Optional: Also pulse outline color intensity
+	congrats_message.add_theme_color_override("font_outline_color", Color(1, 1, 1, size / 4.0))

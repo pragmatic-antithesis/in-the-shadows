@@ -1,7 +1,6 @@
-class_name  BasePuzzle
 extends Area3D
 
-signal puzzle_solved
+signal piece_solved
 
 const move_speed: float = 0.01
 const SPOT_CENTER: Vector2 = Vector2(2.6, 8.2)
@@ -62,7 +61,6 @@ func _on_mouse_entered() -> void:
 	if solved: return
 	_tween_outline_emission(0.42, 0., "show")
 
-
 func _on_mouse_exited() -> void:
 	if solved or Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		return
@@ -79,9 +77,9 @@ func _on_mesh_piece_solved(solved_position: Vector3, solved_rotation: Vector3) -
 	const scale_down: float = 1.001
 	var puzzle_piece: MeshInstance3D = $Collision/Mesh
 	print("pos: ",  puzzle_piece.global_position)
-	
-	puzzle_solved.emit()
-	
+
+	piece_solved.emit()
+
 	if tween and tween.is_valid():
 		tween.kill()
 	tween = create_tween()
