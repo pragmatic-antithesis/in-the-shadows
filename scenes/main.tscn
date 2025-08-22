@@ -37,7 +37,7 @@ shader_parameter/radius_dist = 0.1
 shader_parameter/u_mouse = Vector2(0.45, 0.44)
 shader_parameter/disable_darkening = false
 shader_parameter/rect_center = Vector2(0.5, 0.5)
-shader_parameter/rect_size = Vector2(0.085, 0.18)
+shader_parameter/rect_size = Vector2(0.085, 0.23)
 shader_parameter/edge_softness = 0.05
 shader_parameter/edge_sharpness = 0.015
 
@@ -256,6 +256,15 @@ theme = SubResource("Theme_o6xl0")
 text = "Test Mode"
 icon_alignment = 1
 
+[node name="Reload" type="Button" parent="GUI/MenuCanvas/Buttons/StartMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = SubResource("Theme_o6xl0")
+theme_override_font_sizes/font_size = 36
+text = "Reset Game"
+icon_alignment = 1
+
 [node name="LevelSelect" type="VBoxContainer" parent="GUI/MenuCanvas/Buttons"]
 visible = false
 anchors_preset = 8
@@ -306,6 +315,17 @@ disabled = true
 text = "The answer"
 icon_alignment = 1
 
+[node name="BackToMenu" type="Button" parent="GUI/MenuCanvas/Buttons/LevelSelect"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+mouse_default_cursor_shape = 2
+theme = SubResource("Theme_o6xl0")
+theme_override_font_sizes/font_size = 30
+text = "Return ↺ 
+"
+icon_alignment = 1
+
 [node name="CallMenu" type="Button" parent="GUI/MenuCanvas/Buttons"]
 visible = false
 anchors_preset = 1
@@ -318,6 +338,51 @@ mouse_default_cursor_shape = 2
 theme = SubResource("Theme_o6xl0")
 theme_override_font_sizes/font_size = 24
 text = "Menu"
+icon_alignment = 1
+
+[node name="PuzzleComplete" type="CanvasLayer" parent="GUI/MenuCanvas"]
+visible = false
+
+[node name="Background" type="ColorRect" parent="GUI/MenuCanvas/PuzzleComplete"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.164706)
+
+[node name="Message" type="Label" parent="GUI/MenuCanvas/PuzzleComplete"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -320.5
+offset_top = 20.0
+offset_right = 320.5
+offset_bottom = 105.146
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 25
+theme_override_font_sizes/font_size = 60
+text = "You solved the puzzle!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelSelect" type="Button" parent="GUI/MenuCanvas/PuzzleComplete"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -108.0
+offset_right = 50.0
+offset_bottom = -41.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme = SubResource("Theme_o6xl0")
+theme_override_font_sizes/font_size = 36
+text = "Back"
 icon_alignment = 1
 
 [node name="TitleCanvas" type="CanvasLayer" parent="GUI/MenuCanvas"]
@@ -399,12 +464,16 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="GUI/MenuCanvas/Buttons/StartMenu/NewGame" to="GUI" method="_on_start_menu_pressed" binds= [1]]
 [connection signal="gui_input" from="GUI/MenuCanvas/Buttons/StartMenu/TestMode" to="GUI" method="_on_menu_gui_input"]
 [connection signal="pressed" from="GUI/MenuCanvas/Buttons/StartMenu/TestMode" to="GUI" method="_on_start_menu_pressed" binds= [2]]
+[connection signal="gui_input" from="GUI/MenuCanvas/Buttons/StartMenu/Reload" to="GUI" method="_on_menu_gui_input"]
+[connection signal="pressed" from="GUI/MenuCanvas/Buttons/StartMenu/Reload" to="GUI" method="_on_reload_pressed"]
 [connection signal="gui_input" from="GUI/MenuCanvas/Buttons/LevelSelect/Puzzle1" to="GUI" method="_on_menu_gui_input"]
 [connection signal="pressed" from="GUI/MenuCanvas/Buttons/LevelSelect/Puzzle1" to="GUI" method="_on_level_select_pressed" binds= ["res://scenes/puzzle1.tscn"]]
 [connection signal="gui_input" from="GUI/MenuCanvas/Buttons/LevelSelect/Puzzle2" to="GUI" method="_on_menu_gui_input"]
 [connection signal="pressed" from="GUI/MenuCanvas/Buttons/LevelSelect/Puzzle2" to="GUI" method="_on_level_select_pressed" binds= ["res://scenes/puzzle2.tscn"]]
 [connection signal="gui_input" from="GUI/MenuCanvas/Buttons/LevelSelect/Puzzle3" to="GUI" method="_on_menu_gui_input"]
 [connection signal="gui_input" from="GUI/MenuCanvas/Buttons/LevelSelect/Puzzle4" to="GUI" method="_on_menu_gui_input"]
+[connection signal="gui_input" from="GUI/MenuCanvas/Buttons/LevelSelect/BackToMenu" to="GUI" method="_on_menu_gui_input"]
+[connection signal="pressed" from="GUI/MenuCanvas/Buttons/LevelSelect/BackToMenu" to="GUI" method="_on_back_to_menu_pressed"]
 [connection signal="gui_input" from="GUI/MenuCanvas/Buttons/CallMenu" to="GUI" method="_on_menu_gui_input"]
 [connection signal="pressed" from="GUI/MenuCanvas/Buttons/CallMenu" to="GUI" method="_on_call_menu_pressed"]
 [connection signal="gui_input" from="GUI/MenuCanvas/TitleCanvas/GameTitle" to="GUI" method="_on_game_title_gui_input"]

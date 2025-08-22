@@ -1,4 +1,7 @@
+class_name  BasePuzzle
 extends Area3D
+
+signal puzzle_solved
 
 const move_speed: float = 0.01
 const SPOT_CENTER: Vector2 = Vector2(2.6, 8.2)
@@ -76,6 +79,8 @@ func _on_mesh_piece_solved(solved_position: Vector3, solved_rotation: Vector3) -
 	const scale_down: float = 1.001
 	var puzzle_piece: MeshInstance3D = $Collision/Mesh
 	print("pos: ",  puzzle_piece.global_position)
+	
+	puzzle_solved.emit()
 	
 	if tween and tween.is_valid():
 		tween.kill()
