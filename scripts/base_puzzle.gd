@@ -3,6 +3,7 @@ extends Node3D
 
 signal puzzle_solved
 
+@onready var mesh: MeshInstance3D = $MainMesh/Collision/Mesh
 @onready var children: Array[Node]
 var completion_status: Array[bool] = []
 
@@ -21,4 +22,4 @@ func _ready():
 func _on_child_solved(child_index: int):
 	completion_status[child_index] = true
 	if completion_status.all(func(status): return status):
-		puzzle_solved.emit()
+		puzzle_solved.emit(mesh.level_id)

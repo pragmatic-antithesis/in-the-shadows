@@ -284,7 +284,6 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme = SubResource("Theme_o6xl0")
 theme_override_font_sizes/font_size = 36
-disabled = true
 text = "It's five o'clock"
 icon_alignment = 1
 
@@ -293,7 +292,6 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme = SubResource("Theme_o6xl0")
 theme_override_font_sizes/font_size = 36
-disabled = true
 text = "I remember"
 icon_alignment = 1
 
@@ -302,7 +300,6 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme = SubResource("Theme_o6xl0")
 theme_override_font_sizes/font_size = 36
-disabled = true
 text = "Spin and point"
 icon_alignment = 1
 
@@ -311,7 +308,6 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme = SubResource("Theme_o6xl0")
 theme_override_font_sizes/font_size = 36
-disabled = true
 text = "The answer"
 icon_alignment = 1
 
@@ -349,7 +345,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 1, 1, 0.164706)
+color = Color(1, 1, 1, 0.0196078)
 
 [node name="Message" type="Label" parent="GUI/MenuCanvas/PuzzleComplete"]
 anchors_preset = 5
@@ -367,7 +363,7 @@ text = "You solved the puzzle!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LevelSelect" type="Button" parent="GUI/MenuCanvas/PuzzleComplete"]
+[node name="ReturnFromComplete" type="Button" parent="GUI/MenuCanvas/PuzzleComplete"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -476,6 +472,7 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="GUI/MenuCanvas/Buttons/LevelSelect/BackToMenu" to="GUI" method="_on_back_to_menu_pressed"]
 [connection signal="gui_input" from="GUI/MenuCanvas/Buttons/CallMenu" to="GUI" method="_on_menu_gui_input"]
 [connection signal="pressed" from="GUI/MenuCanvas/Buttons/CallMenu" to="GUI" method="_on_call_menu_pressed"]
+[connection signal="pressed" from="GUI/MenuCanvas/PuzzleComplete/ReturnFromComplete" to="GUI" method="_on_return_from_complete_pressed"]
 [connection signal="gui_input" from="GUI/MenuCanvas/TitleCanvas/GameTitle" to="GUI" method="_on_game_title_gui_input"]
 [connection signal="gui_input" from="GUI/MenuCanvas/TitleCanvas/StartGame" to="GUI" method="_on_game_title_gui_input"]
 [connection signal="pressed" from="GUI/MenuCanvas/TitleCanvas/StartGame" to="GUI" method="_on_start_game_pressed"]

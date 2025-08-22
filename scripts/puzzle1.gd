@@ -3,6 +3,7 @@ extends MeshInstance3D
 signal piece_solved
 
 var solved: bool = false
+@export var level_id: int = 1
 
 func _ready() -> void:
 	rotation = Vector3(0.0, -2.5, 0.0)
