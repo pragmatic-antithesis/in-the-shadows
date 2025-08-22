@@ -58,6 +58,7 @@ func _on_start_menu_pressed(option: int) -> void:
 		var button = level_select.get_child(i)
 		if button is BaseButton:
 			button.disabled = false
+	menu_background.set_shader_parameter("rect_size", Vector2(0.085, 0.2))
 
 func _on_level_select_pressed(scene_path: String) -> void:
 	if not current_scene or current_scene.scene_file_path != scene_path:
@@ -79,7 +80,6 @@ func _on_start_game_pressed() -> void:
 	for child in title_canvas.get_children():
 		child.queue_free()
 	title_canvas.queue_free()
-	menu_background.set_shader_parameter("disable_darkening", false)
 
 func _on_game_title_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:

@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=4 uid="uid://bfaccga7wc38p"]
+[gd_scene load_steps=8 format=4 uid="uid://bfaccga7wc38p"]
 
 [ext_resource type="Script" uid="uid://8x8qt3op0wph" path="res://scripts/puzzle.gd" id="1_7pooc"]
 [ext_resource type="ArrayMesh" uid="uid://wpecvx1trlvy" path="res://assets/objs/elephant.obj" id="2_ktcv2"]
 [ext_resource type="Script" uid="uid://dvfo2kgk3str2" path="res://scripts/puzzle2.gd" id="3_6e5t8"]
 [ext_resource type="Material" uid="uid://cgr7jfp4pui31" path="res://shaders/highlight.tres" id="4_cmli7"]
-[ext_resource type="AudioStream" uid="uid://b0vfkjwlntscf" path="res://assets/sounds/gajah-220044.mp3" id="5_6e5t8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5ifmx"]
 size = Vector3(5.21886, 1.23096, 7.34337)
@@ -43,11 +42,9 @@ script = ExtResource("3_6e5t8")
 
 [node name="Outline" type="MeshInstance3D" parent="MainMesh/Collision/Mesh"]
 transform = Transform3D(1, 1.11022e-16, 7.10543e-15, 0, 1, 0, -7.10543e-15, 0, 1, 0, 0, 0)
+visible = false
 mesh = SubResource("ArrayMesh_6e5t8")
 surface_material_override/0 = ExtResource("4_cmli7")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MainMesh/Collision/Mesh"]
-stream = ExtResource("5_6e5t8")
 
 [connection signal="input_event" from="MainMesh" to="MainMesh" method="_on_input_event"]
 [connection signal="mouse_entered" from="MainMesh" to="MainMesh" method="_on_mouse_entered"]

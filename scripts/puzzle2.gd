@@ -15,7 +15,7 @@ func _angle_diff_deg(a: float, b: float) -> float:
 	return diff
 
 const ROTATION_RANGES: Dictionary = {
-	"x": {"min": 1.3, "max": 1.4},
+	"x": {"min": 1.3, "max": 1.5},
 	"y": {"min": -2.5, "max": -1.5},
 	"z": {"min": -2.3, "max": -1.7}
 }

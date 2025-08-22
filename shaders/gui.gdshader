@@ -6,10 +6,10 @@ uniform float radius = 0.1;
 uniform float strength = 0.5;
 uniform float radius_dist = 0.1;
 uniform vec2 u_mouse = vec2(0.45, 0.44);
-uniform bool disable_darkening = true;
+uniform bool disable_darkening = false;
 
 uniform vec2 rect_center = vec2(0.5, 0.5);
-uniform vec2 rect_size   = vec2(0.085, 0.235);
+uniform vec2 rect_size   = vec2(0.085, 0.18);
 
 uniform float edge_softness = 0.05;
 uniform float edge_sharpness = 0.015;

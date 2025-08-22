@@ -41,6 +41,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_3asjn")
 script = ExtResource("3_j46pd")
 
 [node name="Outline" type="MeshInstance3D" parent="MainMesh/Collision/Mesh"]
+visible = false
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_3asjn")
 surface_material_override/0 = ExtResource("4_mjqgh")

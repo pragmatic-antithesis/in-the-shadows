@@ -1,26 +1,23 @@
 extends Area3D
 
 const move_speed: float = 0.01
-const SPOT_CENTER = Vector2(2.6, 8.2)
-const SPOT_RADIUS = 5.0
-var outline: StandardMaterial3D
+const SPOT_CENTER: Vector2 = Vector2(2.6, 8.2)
+const SPOT_RADIUS: float = 5.0
 var selected: bool = false
 var solved: bool = false
+@onready var tween: Tween = null
 @onready var mesh_outline: MeshInstance3D = $Collision/Mesh/Outline
-
-func _ready() -> void:
-	mesh_outline.hide()
-	outline = mesh_outline.get_surface_override_material(0)
+@onready var outline: StandardMaterial3D = mesh_outline.get_surface_override_material(0)
 
 func _on_input_event(_camera: Node, _event: InputEvent, _event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	if solved: return
 	if not selected and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		selected = true
-		outline.emission_energy_multiplier = 1.42
-		
+		_tween_outline_emission(1.42, 0.5)
+
 func _input(event: InputEvent) -> void:
 	if solved or not selected: return
-	outline.emission_energy_multiplier = 1.42
+	_tween_outline_emission(1.42, 0.5)
 	var puzzle_piece: MeshInstance3D = $Collision/Mesh
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		if Input.is_action_pressed("vertical_rotate"):
@@ -60,32 +57,40 @@ func _get_clamped_move(piece: Node3D, move: Vector3) -> Vector3:
 
 func _on_mouse_entered() -> void:
 	if solved: return
-	var tween: Tween = create_tween()
-	mesh_outline.show()
-	tween.tween_property(outline, "emission_energy_multiplier", 0.42, 0.3)
+	_tween_outline_emission(0.42, 0., "show")
+
 
 func _on_mouse_exited() -> void:
 	if solved or Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		return
 	selected = false
-	var tween: Tween = create_tween()
-	tween.tween_property(outline, "emission_energy_multiplier", 0.0, 0.2)
-	tween.tween_callback(Callable(mesh_outline, "hide"))
+	_tween_outline_emission(0.0, 0.2, "hide")
 
 func _on_mesh_piece_solved(solved_position: Vector3, solved_rotation: Vector3) -> void:
 	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 	if solved: return
 	solved = true
-	var tween: Tween = create_tween()
 	mesh_outline.show()
 	const blink_duration: float = 0.2
 	const scale_up: float = 1.015
 	const scale_down: float = 1.001
 	var puzzle_piece: MeshInstance3D = $Collision/Mesh
 	print("pos: ",  puzzle_piece.global_position)
+	
+	if tween and tween.is_valid():
+		tween.kill()
+	tween = create_tween()
 	tween.tween_property(puzzle_piece, "global_position", solved_position, 1.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.parallel().tween_property(puzzle_piece, "rotation", solved_rotation, 1.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.parallel().tween_property(outline, "emission_energy_multiplier", 3.42, blink_duration * 1.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(mesh_outline, "scale", Vector3(scale_up, scale_up, scale_up), blink_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(mesh_outline, "scale", Vector3(scale_down, scale_down, scale_down), blink_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	tween.tween_callback(Callable(mesh_outline, "hide"))
+
+func _tween_outline_emission(final_val: float, duration: float, action: String = "") -> void:
+	if tween and tween.is_valid():
+		tween.kill()
+	tween = create_tween()
+	tween.tween_property(outline, "emission_energy_multiplier", final_val, duration)
+	if action:
+		tween.tween_callback(func(): mesh_outline.call(action))
