@@ -222,6 +222,7 @@ color = Color(0.462291, 0.462291, 0.462291, 1)
 [node name="Buttons" type="Node" parent="GUI/MenuCanvas"]
 
 [node name="StartMenu" type="VBoxContainer" parent="GUI/MenuCanvas/Buttons"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -292,6 +293,7 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme = SubResource("Theme_o6xl0")
 theme_override_font_sizes/font_size = 36
+disabled = true
 text = "I remember"
 icon_alignment = 1
 
@@ -300,6 +302,7 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme = SubResource("Theme_o6xl0")
 theme_override_font_sizes/font_size = 36
+disabled = true
 text = "Spin and point"
 icon_alignment = 1
 
@@ -308,6 +311,7 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme = SubResource("Theme_o6xl0")
 theme_override_font_sizes/font_size = 36
+disabled = true
 text = "The answer"
 icon_alignment = 1
 

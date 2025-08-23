@@ -2,7 +2,8 @@ extends Control
 
 @onready var puzzle_interface: Node3D = %PuzzleInterface
 @onready var current_scene: Node = null
-@onready var puzzles_unlocked: int = 1
+var puzzles_unlocked: int = 1
+var test_mode: bool = false
 
 #Menu Canvas#
 @onready var alpha_tint: ColorRect = $MenuCanvas/AlphaTint
@@ -25,6 +26,7 @@ const MAX_LEVEL: int = 4
 @onready var start_menu: VBoxContainer = $MenuCanvas/Buttons/StartMenu
 @onready var level_select: VBoxContainer = $MenuCanvas/Buttons/LevelSelect
 @onready var call_menu: Button = $MenuCanvas/Buttons/CallMenu
+@onready var continue_button: Button = $MenuCanvas/Buttons/StartMenu/Continue
 
 func _ready() -> void:
 	AudioPlayer.play_music("menu", 2.0)
@@ -74,10 +76,11 @@ func _on_start_game_pressed() -> void:
 	for child in title_canvas.get_children():
 		child.queue_free()
 	title_canvas.queue_free()
+	_show_start_menu()
 
 func _on_back_to_menu_pressed() -> void:
 	AudioPlayer.play_music("selection")
-	start_menu.show()
+	_show_start_menu()
 	level_select.hide()
 	menu_background.set_shader_parameter("rect_size", Vector2(0.085, 0.24))
 
@@ -87,20 +90,38 @@ func _on_return_from_complete_pressed() -> void:
 		if tween and tween.is_valid():
 			tween.kill()
 	puzzle_complete.hide()
-	_show_level_select(LevelOption.RETURNING)
+	current_scene.queue_free()
+	current_scene = null
+	alpha_tint.show()
+	menu_background.set_shader_parameter("disable_darkening", false)
+	_show_level_select(LevelOption.CONTINUE)
+
+
+func _show_start_menu() -> void:
+	if puzzles_unlocked == 1:
+		continue_button.disabled = true
+	else:
+		continue_button.disabled = false
+	start_menu.show()
 
 func _show_level_select(option: int) -> void:
-	print("calling show level select with option: ", option)
 	var limit: int = 0
-	if option == LevelOption.NEW:
-		limit = 1
-	if option == LevelOption.CONTINUE: 
-		limit = puzzles_unlocked
-	if limit > 0:
+	match option:
+		LevelOption.TEST:
+			test_mode = true
+			limit = MAX_LEVEL
+		LevelOption.NEW:
+			limit = 1
+		LevelOption.CONTINUE:
+			limit = puzzles_unlocked
+	if limit:
 		for i in range(MAX_LEVEL):
 			var button = level_select.get_child(i)
-			if button is BaseButton and (i > limit):
-				button.disabled = true
+			if button is BaseButton:
+				if i < limit:
+					button.disabled = false
+				else:
+					button.disabled = true
 	level_select.show()
 	menu_background.set_shader_parameter("rect_size", Vector2(0.085, 0.24))
 
@@ -117,7 +138,10 @@ func _on_game_title_gui_input(event: InputEvent) -> void:
 		title_screen.material.set_shader_parameter("mouse_pos", uv_mouse)
 
 func _on_puzzle_solved(level_id: int) -> void:
-	puzzles_unlocked = (min(level_id + 1, MAX_LEVEL))
+	if not test_mode:
+		puzzles_unlocked = (min(level_id + 1, MAX_LEVEL))
+	else:
+		test_mode = false
 	puzzle_complete.show()
 	call_menu.hide()
 	_start_pulsing()
