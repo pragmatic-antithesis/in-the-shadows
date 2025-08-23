@@ -2,7 +2,10 @@ extends Control
 
 @onready var puzzle_interface: Node3D = %PuzzleInterface
 @onready var current_scene: Node = null
+
+#@onready var current_profile: SaveProfile
 var puzzles_unlocked: int = 1
+
 var test_mode: bool = false
 
 #Menu Canvas#

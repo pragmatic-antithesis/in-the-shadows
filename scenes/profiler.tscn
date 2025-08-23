@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqq7qx31jskno"]
+
+[ext_resource type="Script" uid="uid://ccj6p7lpafhae" path="res://scripts/profiler.gd" id="1_04sa4"]
+[ext_resource type="Script" uid="uid://dv5uy0vooph6a" path="res://scripts/save_profile.gd" id="2_wvr6i"]
+
+[node name="Profiler" type="Node"]
+script = ExtResource("1_04sa4")
+
+[node name="SaveProfile" type="Node" parent="."]
+script = ExtResource("2_wvr6i")

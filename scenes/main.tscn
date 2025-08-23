@@ -456,6 +456,13 @@ text = "Start Game"
 flat = true
 metadata/_edit_use_anchors_ = true
 
+[node name="SaveMenu" type="Control" parent="GUI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SaveCanvas" type="CanvasLayer" parent="GUI/SaveMenu"]
+
 [connection signal="gui_input" from="GUI/MenuCanvas/AlphaTint" to="GUI" method="_on_menu_gui_input"]
 [connection signal="gui_input" from="GUI/MenuCanvas/Buttons/StartMenu" to="GUI" method="_on_menu_gui_input"]
 [connection signal="gui_input" from="GUI/MenuCanvas/Buttons/StartMenu/Continue" to="GUI" method="_on_menu_gui_input"]
