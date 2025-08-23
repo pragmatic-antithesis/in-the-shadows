@@ -3,8 +3,8 @@ extends Control
 @onready var puzzle_interface: Node3D = %PuzzleInterface
 @onready var current_scene: Node = null
 
-#@onready var current_profile: SaveProfile
-var puzzles_unlocked: int = 1
+@onready var save_menu: Control = %SaveMenu
+@onready var active_profile: SaveProfile
 
 var test_mode: bool = false
 
@@ -32,6 +32,7 @@ const MAX_LEVEL: int = 4
 @onready var continue_button: Button = $MenuCanvas/Buttons/StartMenu/Continue
 
 func _ready() -> void:
+	active_profile = save_menu.get_slot()
 	AudioPlayer.play_music("menu", 2.0)
 	menu_background.set_shader_parameter("aspect_ratio", size.y / size.x)
 
@@ -101,7 +102,7 @@ func _on_return_from_complete_pressed() -> void:
 
 
 func _show_start_menu() -> void:
-	if puzzles_unlocked == 1:
+	if active_profile.puzzles_unlocked == 1:
 		continue_button.disabled = true
 	else:
 		continue_button.disabled = false
@@ -116,7 +117,7 @@ func _show_level_select(option: int) -> void:
 		LevelOption.NEW:
 			limit = 1
 		LevelOption.CONTINUE:
-			limit = puzzles_unlocked
+			limit = active_profile.puzzles_unlocked
 	if limit:
 		for i in range(MAX_LEVEL):
 			var button = level_select.get_child(i)
@@ -142,7 +143,7 @@ func _on_game_title_gui_input(event: InputEvent) -> void:
 
 func _on_puzzle_solved(level_id: int) -> void:
 	if not test_mode:
-		puzzles_unlocked = (min(level_id + 1, MAX_LEVEL))
+		save_menu.update_progress(min(level_id + 1, MAX_LEVEL))
 	else:
 		test_mode = false
 	puzzle_complete.show()

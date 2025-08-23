@@ -19,15 +19,10 @@ func get_profiles() -> Array[SaveProfile]:
 	return profiles
 
 func save_profiles() -> void:
-	var data: Array = []
-	for profile in profiles:
-		data.append({
-			"player_name": profile.player_name,
-			"puzzles_unlocked": profile.puzzles_unlocked
-		})
 	var file: FileAccess = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if file:
-		file.store_var(data)
+		file.store_var(profiles)
+		file.close()
 	else:
 		push_error("Failed to save profiles!")
 
@@ -43,11 +38,11 @@ func load_profiles() -> void:
 	var data = file.get_var()
 	if typeof(data) != TYPE_ARRAY:
 		push_error("Corrupted profile save file!")
-		return
-
-	_init_slots()
-	for i in min(SLOT_COUNT, data.size()):
-		var slot = data[i]
-		if typeof(slot) == TYPE_DICTIONARY:
-			profiles[i].player_name = slot.get("player_name", "")
-			profiles[i].puzzles_unlocked = slot.get("puzzles_unlocked", 0)
+	else:
+		_init_slots()
+		for i in min(SLOT_COUNT, data.size()):
+			var slot = data[i]
+			if typeof(slot) == TYPE_DICTIONARY:
+				profiles[i].player_name = slot.get("player_name", "")
+				profiles[i].puzzles_unlocked = slot.get("puzzles_unlocked", 0)
+	file.close()
