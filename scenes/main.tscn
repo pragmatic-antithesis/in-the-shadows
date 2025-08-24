@@ -732,6 +732,7 @@ text = "Delete"
 [connection signal="gui_input" from="GUI/MenuCanvas/Buttons/LevelSelect/Puzzle3" to="GUI" method="_on_menu_gui_input"]
 [connection signal="pressed" from="GUI/MenuCanvas/Buttons/LevelSelect/Puzzle3" to="GUI" method="_on_level_select_pressed" binds= ["res://scenes/puzzle3.tscn"]]
 [connection signal="gui_input" from="GUI/MenuCanvas/Buttons/LevelSelect/Puzzle4" to="GUI" method="_on_menu_gui_input"]
+[connection signal="pressed" from="GUI/MenuCanvas/Buttons/LevelSelect/Puzzle4" to="GUI" method="_on_level_select_pressed" binds= ["res://scenes/puzzle4.tscn"]]
 [connection signal="gui_input" from="GUI/MenuCanvas/Buttons/LevelSelect/BackToMenu" to="GUI" method="_on_menu_gui_input"]
 [connection signal="pressed" from="GUI/MenuCanvas/Buttons/LevelSelect/BackToMenu" to="GUI" method="_on_back_to_menu_pressed"]
 [connection signal="gui_input" from="GUI/MenuCanvas/Buttons/CallMenu" to="GUI" method="_on_menu_gui_input"]

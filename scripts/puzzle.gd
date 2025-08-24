@@ -30,6 +30,7 @@ func _on_mouse_exited() -> void:
 
 func _input(event: InputEvent) -> void:
 	if locked or not selected: return
+	print("pog")
 	_tween_outline_emission(1.42, 0.5, "show")
 	var puzzle_piece: MeshInstance3D = $Collision/Mesh
 	if Input.is_mouse_button_pressed(control_click):

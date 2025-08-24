@@ -3,11 +3,11 @@ extends MeshInstance3D
 signal piece_solved
 
 var solved: bool = false
-@export var level_id: int = 3
+@export var level_id: int = 4
 
 func _ready() -> void:
 	rotation = Vector3(0.0, -2.5, 0.0)
-	scale = Vector3(0.3, 0.3, 0.3)
+	scale = Vector3(0.2, 0.2, 0.2)
 	position += Vector3(1.0, 2.0, 0.0)
 	AudioPlayer.play_music("puzzle3")
 
@@ -25,9 +25,7 @@ const ROTATION_RANGES: Dictionary = {
 const CENTER = Vector2(-0.17, -0.95)
 const TOLERANCE = 1.5
 const solved_position = Vector3(2.2, 9.7, -7.15)
-const solved_rotation = Vector3(-1.16, 1.25, 1.98)
-
-#const solved_rotation = Vector3(1.2, 1.7, 1.75)
+const solved_rotation = Vector3(1.2, 1.7, 1.75)
 
 func check_piece_solution() -> void:
 	print("rotation: ", rotation)

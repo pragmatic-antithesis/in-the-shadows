@@ -25,9 +25,7 @@ func _ready() -> void:
 
 func _on_child_solved(child_index: int) -> void:
 	completion_status[child_index] = true
-	print("children ", child_index, " solved")
 	if children.size() > 1:
 		if !child_index: children[1].control_click = MOUSE_BUTTON_LEFT
 	if completion_status.all(func(status): return status):
-		print("emiting puzzle solved for ", meshes[0].level_id)
 		puzzle_solved.emit(meshes[0].level_id)

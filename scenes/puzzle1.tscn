@@ -7,7 +7,7 @@
 [ext_resource type="Material" uid="uid://cgr7jfp4pui31" path="res://shaders/highlight.tres" id="4_mjqgh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5ifmx"]
-size = Vector3(5.21886, 1.23096, 7.34337)
+size = Vector3(5.219, 4, 7.343)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3asjn"]
 
