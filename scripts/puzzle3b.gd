@@ -2,7 +2,6 @@ extends MeshInstance3D
 
 signal piece_solved
 
-var solved: bool = false
 @export var level_id: int = 3
 
 func _ready() -> void:
@@ -24,7 +23,7 @@ const ROTATION_RANGES: Dictionary = {
 const CENTER = Vector2(-0.17, -0.95)
 const TOLERANCE = 1.5
 const solved_position = Vector3(2.0, 9.6, -7.15)
-const solved_rotation = Vector3(-1.37, 2.15, 0.78)
+const solved_rotation = Vector3(-1.42, 1.37, 1.57)
 
 #const solved_rotation = Vector3(-1.4, 1.75, 1.4)
 

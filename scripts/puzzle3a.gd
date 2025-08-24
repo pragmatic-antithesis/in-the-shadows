@@ -2,7 +2,6 @@ extends MeshInstance3D
 
 signal piece_solved
 
-var solved: bool = false
 @export var level_id: int = 3
 
 func _ready() -> void:
