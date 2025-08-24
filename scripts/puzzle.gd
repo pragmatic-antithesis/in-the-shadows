@@ -1,24 +1,26 @@
 extends Area3D
 
 signal piece_solved
+signal piece_selected
 
 const move_speed: float = 0.01
 const SPOT_CENTER: Vector2 = Vector2(2.6, 8.2)
 const SPOT_RADIUS: float = 5.0
 var selected: bool = false
-var solved: bool = false
+var locked: bool = false
 @onready var tween: Tween = null
 @onready var mesh_outline: MeshInstance3D = $Collision/Mesh/Outline
 @onready var outline: StandardMaterial3D = mesh_outline.get_surface_override_material(0)
 
 func _on_input_event(_camera: Node, _event: InputEvent, _event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
-	if solved: return
+	if locked: return
 	if not selected and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		selected = true
+		piece_selected.emit(selected)
 		_tween_outline_emission(1.42, 0.5)
 
 func _input(event: InputEvent) -> void:
-	if solved or not selected: return
+	if locked or not selected: return
 	_tween_outline_emission(1.42, 0.5)
 	var puzzle_piece: MeshInstance3D = $Collision/Mesh
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
@@ -58,19 +60,20 @@ func _get_clamped_move(piece: Node3D, move: Vector3) -> Vector3:
 	return move
 
 func _on_mouse_entered() -> void:
-	if solved: return
-	_tween_outline_emission(0.42, 0., "show")
+	if locked: return
+	_tween_outline_emission(0.42, 0.3, "show")
 
 func _on_mouse_exited() -> void:
-	if solved or Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+	if locked or Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		return
 	selected = false
+	piece_selected.emit(selected)
 	_tween_outline_emission(0.0, 0.2, "hide")
 
 func _on_mesh_piece_solved(solved_position: Vector3, solved_rotation: Vector3) -> void:
 	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
-	if solved: return
-	solved = true
+	if locked: return
+	locked = true
 	mesh_outline.show()
 	const blink_duration: float = 0.2
 	const scale_up: float = 1.015

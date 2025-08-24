@@ -3,11 +3,11 @@ extends MeshInstance3D
 signal piece_solved
 
 var solved: bool = false
-@export var level_id: int = 2
+@export var level_id: int = 3
 
 func _ready() -> void:
 	rotation = Vector3(0.0, -2.5, 0.0)
-
+	scale = Vector3(0.3, 0.3, 0.3)
 
 func _angle_diff_deg(a: float, b: float) -> float:
 	var diff = fposmod(a - b, 360.0)

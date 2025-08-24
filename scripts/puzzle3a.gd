@@ -3,10 +3,11 @@ extends MeshInstance3D
 signal piece_solved
 
 var solved: bool = false
-@export var level_id: int = 2
+@export var level_id: int = 3
 
 func _ready() -> void:
 	rotation = Vector3(0.0, -2.5, 0.0)
+	scale = Vector3(0.3, 0.3, 0.3)
 	AudioPlayer.play_music("puzzle3")
 
 func _angle_diff_deg(a: float, b: float) -> float:
@@ -26,6 +27,7 @@ const solved_position = Vector3(1.9, 9.1, -7.15)
 const solved_rotation = Vector3(1.5, -1.95, -1.75)
 
 func check_piece_solution() -> void:
+	print("a")
 	print("rotation: ", rotation)
 	if is_solved():
 		AudioPlayer.play_sfx("puzzle2")
