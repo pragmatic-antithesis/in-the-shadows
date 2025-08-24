@@ -1,13 +1,16 @@
 extends Control
 
-@onready var save_menu_background: ColorRect = $SaveCanvas/MarginContainer/SaveMenuBackground
-@onready var line_edit: LineEdit = $SaveCanvas/MarginContainer/SaveMenuBackground/VBoxContainer/LineEdit
-@onready var level_status: Label = $SaveCanvas/MarginContainer/SaveMenuBackground/VBoxContainer/LevelStatus
+signal profile_chosen(profile: SaveProfile)
+
+@onready var save_canvas: CanvasLayer = $SaveCanvas
+@onready var save_menu_background: Panel = $SaveCanvas/BorderContainer/SaveMenuBackground
+@onready var line_edit: LineEdit = $SaveCanvas/BorderContainer/SaveMenuBackground/VBoxContainer/LineEdit
+@onready var level_status: Label = $SaveCanvas/BorderContainer/SaveMenuBackground/VBoxContainer/LevelStatus
 @onready var slot_name: Array[Label] = [
-	$SaveCanvas/MarginContainer/SaveMenuBackground/VBoxContainer/Slot1/SlotName,
-	$SaveCanvas/MarginContainer/SaveMenuBackground/VBoxContainer/Slot2/SlotName,
-	$SaveCanvas/MarginContainer/SaveMenuBackground/VBoxContainer/Slot3/SlotName,
-	$SaveCanvas/MarginContainer/SaveMenuBackground/VBoxContainer/Slot4/SlotName,	
+	$SaveCanvas/BorderContainer/SaveMenuBackground/VBoxContainer/Slot1/SlotName,
+	$SaveCanvas/BorderContainer/SaveMenuBackground/VBoxContainer/Slot2/SlotName,
+	$SaveCanvas/BorderContainer/SaveMenuBackground/VBoxContainer/Slot3/SlotName,
+	$SaveCanvas/BorderContainer/SaveMenuBackground/VBoxContainer/Slot4/SlotName,	
 ]
 
 var slots: Array[SaveProfile]
@@ -32,23 +35,9 @@ func get_slot() -> SaveProfile:
 		return slots[current_profile]
 	return unsaved_profile
 
-func _create_profile(slot: int, player_name: String) -> SaveProfile:
-	if slot < 0 or slot >= Profiler.SLOT_COUNT:
-		_reset_unsaved_profile()
-		unsaved_profile.player_name = player_name
-		return unsaved_profile
-
-	slots[slot].player_name = player_name
-	slots[slot].puzzles_unlocked = 1
-	
-	Profiler.save_profiles()
+func show_ui() -> void:
 	_refresh_slot_display()
-	return slots[slot]
-
-func _delete_profile(slot: int) -> void:
-	slots[slot] = SaveProfile.new()
-	Profiler.save_profiles()
-	_refresh_slot_display()
+	save_canvas.show()
 
 func _reset_unsaved_profile() -> void:
 	unsaved_profile = SaveProfile.new()
@@ -62,8 +51,8 @@ func _refresh_slot_display() -> void:
 	else:
 		level_display = unsaved_profile.puzzles_unlocked
 	for i in slots.size():
-		slot_name[i].text = slots[i].player_name if slots[i].player_name else "Empty"
-	slot_name[Profiler.SLOT_COUNT].text = unsaved_profile.player_name if unsaved_profile.player_name else "Empty"
+		slot_name[i].text = slots[i].player_name if slots[i].player_name else "void"
+	slot_name[Profiler.SLOT_COUNT].text = unsaved_profile.player_name if unsaved_profile.player_name else "void"
 	var display_text: String = str(level_display) if level_display else " -"
 	level_status.text = "Available puzzles:  " + display_text
 
@@ -79,3 +68,24 @@ func _on_line_edit_text_submitted(new_text: String) -> void:
 	else:
 		unsaved_profile.player_name = new_text
 	_refresh_slot_display()
+
+func _on_delete_profile_pressed() -> void:
+	if current_profile == Profiler.SLOT_COUNT:
+		_reset_unsaved_profile()
+	else:
+		slots[current_profile] = SaveProfile.new()
+		Profiler.save_profiles()
+	_refresh_slot_display()
+
+func _on_select_profile_pressed() -> void:
+	if line_edit.text:
+		line_edit.text_submitted.emit(line_edit.text)
+	var profile_reference: SaveProfile = get_slot()
+	if !profile_reference.player_name:
+		profile_reference.player_name = "Unnamed One"
+	if !profile_reference.puzzles_unlocked:
+		profile_reference.puzzles_unlocked = 1
+	Profiler.save_profiles()
+	emit_signal("profile_chosen", profile_reference)
+	save_canvas.hide()
+	hide()

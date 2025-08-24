@@ -100,7 +100,6 @@ func _on_return_from_complete_pressed() -> void:
 	menu_background.set_shader_parameter("disable_darkening", false)
 	_show_level_select(LevelOption.CONTINUE)
 
-
 func _show_start_menu() -> void:
 	if active_profile.puzzles_unlocked == 1:
 		continue_button.disabled = true
@@ -110,14 +109,16 @@ func _show_start_menu() -> void:
 
 func _show_level_select(option: int) -> void:
 	var limit: int = 0
-	match option:
-		LevelOption.TEST:
-			test_mode = true
-			limit = MAX_LEVEL
-		LevelOption.NEW:
-			limit = 1
-		LevelOption.CONTINUE:
-			limit = active_profile.puzzles_unlocked
+	if option == LevelOption.TEST:
+		test_mode = true
+		limit = MAX_LEVEL
+	elif option == LevelOption.NEW:
+		save_menu.show_ui()
+		test_mode = false
+		active_profile = await save_menu.profile_chosen
+		limit = active_profile.puzzles_unlocked
+	elif option == LevelOption.CONTINUE:
+		limit = active_profile.puzzles_unlocked
 	if limit:
 		for i in range(MAX_LEVEL):
 			var button = level_select.get_child(i)
@@ -146,6 +147,7 @@ func _on_puzzle_solved(level_id: int) -> void:
 		save_menu.update_progress(min(level_id + 1, MAX_LEVEL))
 	else:
 		test_mode = false
+	congrats_message.text = "You solved the puzzle, %s!" % active_profile.player_name
 	puzzle_complete.show()
 	call_menu.hide()
 	_start_pulsing()
