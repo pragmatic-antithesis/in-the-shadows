@@ -1,7 +1,6 @@
 extends Area3D
 
 signal piece_solved
-signal piece_selected
 
 const move_speed: float = 0.01
 const SPOT_CENTER: Vector2 = Vector2(2.6, 8.2)
@@ -11,19 +10,29 @@ var locked: bool = false
 @onready var tween: Tween = null
 @onready var mesh_outline: MeshInstance3D = $Collision/Mesh/Outline
 @onready var outline: StandardMaterial3D = mesh_outline.get_surface_override_material(0)
+@onready var control_click: int = MOUSE_BUTTON_LEFT
 
 func _on_input_event(_camera: Node, _event: InputEvent, _event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	if locked: return
-	if not selected and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+	if not selected and Input.is_mouse_button_pressed(control_click):
 		selected = true
-		piece_selected.emit(selected)
 		_tween_outline_emission(1.42, 0.5)
+
+func _on_mouse_entered() -> void:
+	if locked: return
+	_tween_outline_emission(0.42, 0.3, "show")
+
+func _on_mouse_exited() -> void:
+	if locked or Input.is_mouse_button_pressed(control_click):
+		return
+	selected = false
+	_tween_outline_emission(0.0, 0.2, "hide")
 
 func _input(event: InputEvent) -> void:
 	if locked or not selected: return
-	_tween_outline_emission(1.42, 0.5)
+	_tween_outline_emission(1.42, 0.5, "show")
 	var puzzle_piece: MeshInstance3D = $Collision/Mesh
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+	if Input.is_mouse_button_pressed(control_click):
 		if Input.is_action_pressed("vertical_rotate"):
 			Input.set_default_cursor_shape(Input.CURSOR_VSIZE)
 			if event is InputEventMouseMotion:
@@ -58,17 +67,6 @@ func _get_clamped_move(piece: Node3D, move: Vector3) -> Vector3:
 		var clamped_move_2d = target_pos_2d - current_pos_2d
 		return Vector3(clamped_move_2d.x, clamped_move_2d.y, move.z)
 	return move
-
-func _on_mouse_entered() -> void:
-	if locked: return
-	_tween_outline_emission(0.42, 0.3, "show")
-
-func _on_mouse_exited() -> void:
-	if locked or Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		return
-	selected = false
-	piece_selected.emit(selected)
-	_tween_outline_emission(0.0, 0.2, "hide")
 
 func _on_mesh_piece_solved(solved_position: Vector3, solved_rotation: Vector3) -> void:
 	Input.set_default_cursor_shape(Input.CURSOR_ARROW)

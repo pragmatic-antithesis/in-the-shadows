@@ -89,3 +89,4 @@ surface_material_override/0 = ExtResource("5_l5s0i")
 [connection signal="input_event" from="MainMesh2" to="MainMesh2" method="_on_input_event"]
 [connection signal="mouse_entered" from="MainMesh2" to="MainMesh2" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="MainMesh2" to="MainMesh2" method="_on_mouse_exited"]
+[connection signal="piece_solved" from="MainMesh2/Collision/Mesh" to="MainMesh2" method="_on_mesh_piece_solved"]

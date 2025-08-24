@@ -15,7 +15,8 @@ var tracks: Dictionary = {
 
 var sounds: Dictionary = {
 	"puzzle1": load("res://assets/sounds/glass_004.ogg"),
-	"puzzle2": load("res://assets/sounds/gajah-220044.mp3")
+	"puzzle2": load("res://assets/sounds/gajah-220044.mp3"),
+	"puzzle3": load("res://assets/sounds/spin-complete-295086.mp3"),
 }
 
 func play_music(music_theme: String, delay_start: float = 0.0, fade_time: float = 2.2):

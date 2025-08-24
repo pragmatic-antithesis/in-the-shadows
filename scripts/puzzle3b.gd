@@ -8,6 +8,7 @@ var solved: bool = false
 func _ready() -> void:
 	rotation = Vector3(0.0, -2.5, 0.0)
 	scale = Vector3(0.3, 0.3, 0.3)
+	position -= Vector3(1.0, 2.0, 0.0)
 
 func _angle_diff_deg(a: float, b: float) -> float:
 	var diff = fposmod(a - b, 360.0)
@@ -16,19 +17,19 @@ func _angle_diff_deg(a: float, b: float) -> float:
 	return diff
 
 const ROTATION_RANGES: Dictionary = {
-	"x": {"min": 1.3, "max": 1.5},
-	"y": {"min": -2.5, "max": -1.5},
-	"z": {"min": -2.3, "max": -1.7}
+	"x": {"min": -1.5, "max": -1.3},
+	"y": {"min": 1.6, "max": 1.8},
+	"z": {"min": 1.3, "max": 1.5}
 }
 const CENTER = Vector2(-0.17, -0.95)
 const TOLERANCE = 1.5
-const solved_position = Vector3(1.9, 9.1, -7.15)
-const solved_rotation = Vector3(1.5, -1.95, -1.75)
+const solved_position = Vector3(2.0, 9.7, -7.15)
+const solved_rotation = Vector3(-1.4, 1.75, 1.4)
 
 func check_piece_solution() -> void:
 	print("rotation: ", rotation)
 	if is_solved():
-		AudioPlayer.play_sfx("puzzle2")
+		AudioPlayer.play_sfx("puzzle3")
 		piece_solved.emit(solved_position, solved_rotation)
 
 func is_solved() -> bool:
