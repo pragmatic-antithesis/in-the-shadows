@@ -45,6 +45,7 @@ script = ExtResource("3_6e5t8")
 [node name="Outline" type="MeshInstance3D" parent="MainMesh/Collision/Mesh"]
 transform = Transform3D(1, 1.11022e-16, 7.10543e-15, 0, 1, 0, -7.10543e-15, 0, 1, 0, 0, 0)
 visible = false
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_6e5t8")
 surface_material_override/0 = ExtResource("4_cmli7")
 

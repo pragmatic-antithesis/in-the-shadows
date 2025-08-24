@@ -9,7 +9,8 @@ var tracks: Dictionary = {
 	"menu": load("res://assets/sounds/experimental-rift-wip-17676.mp3"),
 	"selection": preload("res://assets/sounds/the-humming-song-22267.mp3"),
 	"puzzle1": load("res://assets/sounds/old-vinyl-piano-song-14583.ogg"),
-	"puzzle2": load("res://assets/sounds/african-percussion-297608.mp3")
+	"puzzle2": load("res://assets/sounds/african-percussion-297608.mp3"),
+	"puzzle3": load("res://assets/sounds/Adventure.mp3"),
 }
 
 var sounds: Dictionary = {
