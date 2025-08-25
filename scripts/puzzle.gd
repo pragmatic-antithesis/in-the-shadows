@@ -16,7 +16,7 @@ func _on_input_event(_camera: Node, _event: InputEvent, _event_position: Vector3
 	if locked: return
 	if not selected and Input.is_mouse_button_pressed(control_click):
 		selected = true
-		_tween_outline_emission(1.42, 0.5)
+	_tween_outline_emission(1.42, 0.5, "show")
 
 func _on_mouse_entered() -> void:
 	if locked: return
@@ -97,3 +97,23 @@ func _tween_outline_emission(final_val: float, duration: float, action: String =
 	tween.tween_property(outline, "emission_energy_multiplier", final_val, duration)
 	if action:
 		tween.tween_callback(func(): mesh_outline.call(action))
+
+
+
+var last_transform: Transform3D
+
+func _ready():
+	last_transform = global_transform
+
+func _process(_delta):
+	if global_transform != last_transform:
+		# Transform changed - show outline
+		if not outline.emission_energy_multiplier > 0.4:
+			mesh_outline.show()
+			_tween_outline_emission(1.42, 1.5, "show")
+		last_transform = global_transform
+	elif outline.emission_energy_multiplier > 0.4:
+		# Transform stopped changing - hide outline after delay
+		await get_tree().create_timer(0.5).timeout
+		if global_transform == last_transform:  # Still unchanged
+			_tween_outline_emission(0.0, 0.3, "hide")

@@ -3,9 +3,11 @@ extends MeshInstance3D
 signal piece_solved
 
 @export var level_id: int = 4
+const display_scale: Vector3 = Vector3(0.2, 0.2, 0.2)
 
 func _ready() -> void:
-	scale = Vector3(0.2, 0.2, 0.2)
+	scale = display_scale
+	$"../Collision".scale = display_scale
 
 	#await get_tree().create_timer(3.0).timeout # Creates a temporary timer and waits for 3 seconds
 	#piece_solved.emit(solved_position, solved_rotation)

@@ -6,6 +6,11 @@ signal piece_solved
 
 func _ready() -> void:
 	AudioPlayer.play_music("puzzle1")
+	InputManager.disable_actions(["vertical_rotate", "grab_control"])
+
+func _exit_tree() -> void:
+	InputManager.restore_actions(["vertical_rotate", "grab_control"])
+
 
 func _angle_diff_deg(a: float, b: float) -> float:
 	var diff = fposmod(a - b, 360.0)
