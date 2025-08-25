@@ -14,7 +14,7 @@ func _ready() -> void:
 	meshes.resize(children.size())
 
 	for i in children.size():
-		meshes[i] = children[i].get_node("Collision/Mesh")
+		meshes[i] = children[i].get_node("Mesh")
 		if meshes[i].has_signal("piece_solved"):
 			children[i].piece_solved.connect(_on_child_solved.bind(i))
 		else:

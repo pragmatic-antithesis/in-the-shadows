@@ -11,12 +11,14 @@ var tracks: Dictionary = {
 	"puzzle1": load("res://assets/sounds/old-vinyl-piano-song-14583.ogg"),
 	"puzzle2": load("res://assets/sounds/african-percussion-297608.mp3"),
 	"puzzle3": load("res://assets/sounds/Adventure.mp3"),
+	"puzzle4": load("res://assets/sounds/Mothership.mp3"),
 }
 
 var sounds: Dictionary = {
 	"puzzle1": load("res://assets/sounds/glass_004.ogg"),
 	"puzzle2": load("res://assets/sounds/gajah-220044.mp3"),
 	"puzzle3": load("res://assets/sounds/spin-complete-295086.mp3"),
+	"puzzle4": load("res://assets/sounds/ufo-fly-306429.mp3"),
 }
 
 func play_music(music_theme: String, delay_start: float = 0.0, fade_time: float = 2.2):

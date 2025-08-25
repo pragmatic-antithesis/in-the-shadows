@@ -5,10 +5,7 @@ signal piece_solved
 @export var level_id: int = 4
 
 func _ready() -> void:
-	rotation = Vector3(0.0, -2.5, 0.0)
-	position += Vector3(1.0, 2.0, -1.0)
 	scale = Vector3(0.2, 0.2, 0.2)
-	AudioPlayer.play_music("puzzle3")
 
 	#await get_tree().create_timer(3.0).timeout # Creates a temporary timer and waits for 3 seconds
 	#piece_solved.emit(solved_position, solved_rotation)
@@ -32,7 +29,7 @@ const solved_rotation = Vector3(1.2, 1.7, 1.75)
 func check_piece_solution() -> void:
 	print("rotation: ", rotation)
 	if is_solved():
-		AudioPlayer.play_sfx("puzzle3")
+		AudioPlayer.play_sfx("puzzle4")
 		piece_solved.emit(solved_position, solved_rotation)
 
 func is_solved() -> bool:

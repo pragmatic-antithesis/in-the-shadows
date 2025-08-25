@@ -7,7 +7,7 @@
 [ext_resource type="Material" uid="uid://cgr7jfp4pui31" path="res://shaders/highlight.tres" id="4_cmli7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5ifmx"]
-size = Vector3(10, 8, 10)
+size = Vector3(5.5, 6.5, 5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3asjn"]
 
@@ -28,21 +28,22 @@ _surfaces = [{
 script = ExtResource("1_6e5t8")
 
 [node name="MainMesh" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.42, 9.4, -4)
 script = ExtResource("1_7pooc")
 
 [node name="Collision" type="CollisionShape3D" parent="MainMesh"]
-transform = Transform3D(-0.999999, 1.52575e-09, 8.74049e-08, 8.21194e-14, 0.999848, -0.0174525, -8.74181e-08, -0.0174525, -0.999848, -0.609107, 9.13055, -5.78063)
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.3, 0)
 shape = SubResource("BoxShape3D_5ifmx")
 
-[node name="Mesh" type="MeshInstance3D" parent="MainMesh/Collision"]
-transform = Transform3D(1, 1.9984e-15, -4.59011e-12, -1.9984e-15, 1, 1.39698e-07, 4.59011e-12, -1.39698e-07, 1, -0.175682, -0.953053, -0.915663)
+[node name="Mesh" type="MeshInstance3D" parent="MainMesh"]
+transform = Transform3D(0.999999, 1.9984e-15, -4.59011e-12, -1.9984e-15, 1, 1.39698e-07, 4.59011e-12, -1.39698e-07, 1, 0, 0, 0)
 gi_mode = 2
 mesh = ExtResource("2_ktcv2")
-skeleton = NodePath("../../..")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_3asjn")
 script = ExtResource("3_6e5t8")
 
-[node name="Outline" type="MeshInstance3D" parent="MainMesh/Collision/Mesh"]
+[node name="Outline" type="MeshInstance3D" parent="MainMesh/Mesh"]
 transform = Transform3D(1, 1.11022e-16, 7.10543e-15, 0, 1, 0, -7.10543e-15, 0, 1, 0, 0, 0)
 visible = false
 cast_shadow = 0
@@ -52,4 +53,4 @@ surface_material_override/0 = ExtResource("4_cmli7")
 [connection signal="input_event" from="MainMesh" to="MainMesh" method="_on_input_event"]
 [connection signal="mouse_entered" from="MainMesh" to="MainMesh" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="MainMesh" to="MainMesh" method="_on_mouse_exited"]
-[connection signal="piece_solved" from="MainMesh/Collision/Mesh" to="MainMesh" method="_on_mesh_piece_solved"]
+[connection signal="piece_solved" from="MainMesh/Mesh" to="MainMesh" method="_on_mesh_piece_solved"]

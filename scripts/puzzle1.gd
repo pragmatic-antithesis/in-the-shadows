@@ -5,7 +5,6 @@ signal piece_solved
 @export var level_id: int = 1
 
 func _ready() -> void:
-	rotation = Vector3(0.0, -2.5, 0.0)
 	AudioPlayer.play_music("puzzle1")
 
 func _angle_diff_deg(a: float, b: float) -> float:
