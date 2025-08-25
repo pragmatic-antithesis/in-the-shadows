@@ -13,6 +13,13 @@ signal profile_chosen(profile: SaveProfile)
 	$SaveCanvas/BorderContainer/SaveMenuBackground/VBoxContainer/Slot4/SlotName,	
 ]
 
+@onready var check_buttons: Array[CheckButton] = [
+	$SaveCanvas/BorderContainer/SaveMenuBackground/VBoxContainer/Slot1/CheckButton,
+	$SaveCanvas/BorderContainer/SaveMenuBackground/VBoxContainer/Slot2/CheckButton,
+	$SaveCanvas/BorderContainer/SaveMenuBackground/VBoxContainer/Slot3/CheckButton,
+	$SaveCanvas/BorderContainer/SaveMenuBackground/VBoxContainer/Slot4/CheckButton,	
+]
+
 var slots: Array[SaveProfile]
 var unsaved_profile: SaveProfile
 @export var current_profile: int = Profiler.SLOT_COUNT
@@ -26,7 +33,10 @@ func update_progress(new_level: int) -> void:
 	Profiler.save_profiles()
 
 func _ready() -> void:
+	unsaved_profile = SaveProfile.new()
 	slots = Profiler.get_profiles()
+	var selected: int = Profiler.get_selected_profile()
+	check_buttons[selected].set_pressed(true)
 	_reset_unsaved_profile()
 	_refresh_slot_display()
 
@@ -85,6 +95,7 @@ func _on_select_profile_pressed() -> void:
 		profile_reference.player_name = "Unnamed One"
 	if !profile_reference.puzzles_unlocked:
 		profile_reference.puzzles_unlocked = 1
+	Profiler.set_selected_profile(current_profile)
 	Profiler.save_profiles()
 	emit_signal("profile_chosen", profile_reference)
 	save_canvas.hide()

@@ -669,7 +669,6 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ya4ey")
-button_pressed = true
 button_group = SubResource("ButtonGroup_o6xl0")
 
 [node name="Separator1" type="AspectRatioContainer" parent="GUI/SaveMenu/SaveCanvas/BorderContainer/SaveMenuBackground/VBoxContainer"]
