@@ -10,7 +10,8 @@ func _ready() -> void:
 	get_parent().set_rotation(Vector3(
 		randf_range(-1.0, 1.0),
 		randf_range(-1.0, 1.0),
-		randf_range(-1.0, 1.0)))
+		randf_range(-1.0, 1.0))
+	)
 
 func _exit_tree() -> void:
 	InputManager.restore_actions(["grab_control"])

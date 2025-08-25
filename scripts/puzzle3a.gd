@@ -7,42 +7,26 @@ signal piece_solved
 func _ready() -> void:
 	scale = Vector3(0.3, 0.3, 0.3)
 	AudioPlayer.play_music("puzzle3")
-
-func _angle_diff_deg(a: float, b: float) -> float:
-	var diff = fposmod(a - b, 360.0)
-	if diff > 180.0:
-		diff -= 360.0
-	return diff
+	get_parent().set_rotation(Vector3(
+		randf_range(-1.0, 1.0),
+		randf_range(-1.0, 1.0),
+		randf_range(-1.0, 1.0))
+	)
 
 const ROTATION_RANGES: Dictionary = {
-	"x": {"min": 1.1, "max": 1.3},
-	"y": {"min": 1.6, "max": 1.8},
-	"z": {"min": 1.7, "max": 1.8}
+	"x": {"min": -0.5, "max": 0.5},
+	"y": {"min": -1.7, "max": -1.2},
+	"z": {"min": 1.3, "max": 2.2},
 }
 
-const CENTER = Vector2(-0.17, -0.95)
-const TOLERANCE = 100.5
-const solved_position = Vector3(1.77, 9.42, -5.73)
-const solved_rotation = Vector3(1.30, 0.60, -2.3)
-
-const ANGLE_TOLERANCE: float = 0.05 #3 deg
-func modularize(coord: float) -> float:
-	if coord > PI - ANGLE_TOLERANCE:
-		print("I GOT CALLED AND AM BIGGER THAN PI", coord)
-		return -PI
-	if coord < -PI + ANGLE_TOLERANCE:
-		print("I GOT CALLED AND AM SMALLER THAN PI ", coord)
-		return -PI
-	return coord
+const CENTER = Vector2(1.91, 10.28)
+const TOLERANCE = 0.75
+const solved_position = Vector3(2.22, 9.91, -7.6)
+const solved_rotation = Vector3(0.1, -1.48, 1.85)
 
 func check_piece_solution(mesh_position: Vector3, mesh_rotation: Vector3) -> void:
-	var normalized_rotation = Vector3(
-		modularize(mesh_rotation.x),
-		modularize(mesh_rotation.y),
-		modularize(mesh_rotation.z))
-	print("received position: ", mesh_position, " and rotation ", normalized_rotation)
-	if is_solved(mesh_position, normalized_rotation):
-		AudioPlayer.play_sfx("puzzle2")
+	if is_solved(mesh_position, mesh_rotation):
+		AudioPlayer.play_sfx("puzzle3")
 		piece_solved.emit(solved_position, solved_rotation)
 
 func is_solved(mesh_position: Vector3, mesh_rotation: Vector3) -> bool:

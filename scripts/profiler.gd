@@ -7,7 +7,7 @@ const SLOT_COUNT: int = 3
 var profiles: Array[SaveProfile] = []
 
 func _ready() -> void:
-	load_profiles()  # This will initialize slots if needed
+	load_profiles()
 
 func get_profiles() -> Array[SaveProfile]:
 	return profiles
@@ -15,7 +15,6 @@ func get_profiles() -> Array[SaveProfile]:
 func save_profiles() -> void:
 	var file: FileAccess = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if file:
-		# Convert all profiles to dictionaries for serialization
 		var save_data := []
 		for profile in profiles:
 			save_data.append(profile.to_dict())
@@ -26,7 +25,6 @@ func save_profiles() -> void:
 
 func load_profiles() -> void:
 	if not FileAccess.file_exists(SAVE_PATH):
-		# Initialize empty slots if no save file exists
 		_init_empty_slots()
 		return
 
@@ -44,21 +42,14 @@ func load_profiles() -> void:
 		_init_empty_slots()
 		return
 	
-	# Clear and rebuild from save data
 	profiles.clear()
 	for i in SLOT_COUNT:
 		if i < data.size() and typeof(data[i]) == TYPE_DICTIONARY:
-			# Use from_dict to create SaveProfile instances
 			profiles.append(SaveProfile.from_dict(data[i]))
 		else:
-			# Add empty profile if no data for this slot
 			profiles.append(SaveProfile.new())
 
 func _init_empty_slots() -> void:
 	profiles.clear()
 	for i in SLOT_COUNT:
 		profiles.append(SaveProfile.new())
-
-func _print_profiles():
-	for i in range(0, 3):
-		print("name: ", profiles[i].player_name)

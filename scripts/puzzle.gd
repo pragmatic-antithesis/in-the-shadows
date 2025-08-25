@@ -31,6 +31,12 @@ func _on_mouse_exited() -> void:
 func _input(event: InputEvent) -> void:
 	if locked or not selected: return
 	_tween_outline_emission(1.42, 0.5, "show")
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			rotate_object_local(Vector3.FORWARD, deg_to_rad(5.0))  # Rotate clockwise
+			get_viewport().set_input_as_handled()
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			rotate_object_local(Vector3.FORWARD, deg_to_rad(-5.0))  # Rotate counte
 	if Input.is_mouse_button_pressed(control_click):
 		if Input.is_action_pressed("vertical_rotate"):
 			Input.set_default_cursor_shape(Input.CURSOR_VSIZE)
@@ -46,6 +52,7 @@ func _input(event: InputEvent) -> void:
 			Input.set_default_cursor_shape(Input.CURSOR_HSIZE)
 			if event is InputEventMouseMotion:
 				rotate_object_local(Vector3.UP, deg_to_rad(event.relative.x))
+
 	
 	if event is InputEventMouseButton and not event.pressed:
 		Input.set_default_cursor_shape(Input.CURSOR_ARROW)
@@ -108,7 +115,7 @@ func _process(_delta):
 			outline.emission_energy_multiplier = 1.42
 		last_transform = global_transform
 	elif outline.emission_energy_multiplier > 0.4:
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(1.5).timeout
 		if global_transform == last_transform:
 			if not locked:
 				outline.emission_energy_multiplier = 0.3
