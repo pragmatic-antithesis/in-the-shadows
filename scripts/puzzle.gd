@@ -49,7 +49,7 @@ func _input(event: InputEvent) -> void:
 	
 	if event is InputEventMouseButton and not event.pressed:
 		Input.set_default_cursor_shape(Input.CURSOR_ARROW)
-		$Mesh.check_piece_solution()
+		$Mesh.check_piece_solution(global_position, rotation)
 		_on_mouse_exited()
 
 func _get_clamped_move(move: Vector3) -> Vector3:
@@ -73,9 +73,6 @@ func _on_mesh_piece_solved(solved_position: Vector3, solved_rotation: Vector3) -
 	$Collision.hide()
 	piece_solved.emit()
 
-	print("pos: ",  global_position)
-
-
 	mesh_outline.show()
 	const blink_duration: float = 0.2
 	const scale_up: float = 1.015
@@ -88,7 +85,8 @@ func _on_mesh_piece_solved(solved_position: Vector3, solved_rotation: Vector3) -
 	tween.parallel().tween_property(outline, "emission_energy_multiplier", 3.42, blink_duration * 1.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(mesh_outline, "scale", Vector3(scale_up, scale_up, scale_up), blink_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(mesh_outline, "scale", Vector3(scale_down, scale_down, scale_down), blink_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
-	tween.tween_callback(Callable(mesh_outline, "hide"))
+	tween.tween_callback(func(): mesh_outline.call("hide"))
+
 
 func _tween_outline_emission(final_val: float, duration: float, action: String = "") -> void:
 	if tween and tween.is_valid():
@@ -98,8 +96,6 @@ func _tween_outline_emission(final_val: float, duration: float, action: String =
 	if action:
 		tween.tween_callback(func(): mesh_outline.call(action))
 
-
-
 var last_transform: Transform3D
 
 func _ready():
@@ -107,13 +103,12 @@ func _ready():
 
 func _process(_delta):
 	if global_transform != last_transform:
-		# Transform changed - show outline
 		if not outline.emission_energy_multiplier > 0.4:
 			mesh_outline.show()
-			_tween_outline_emission(1.42, 1.5, "show")
+			outline.emission_energy_multiplier = 1.42
 		last_transform = global_transform
 	elif outline.emission_energy_multiplier > 0.4:
-		# Transform stopped changing - hide outline after delay
 		await get_tree().create_timer(0.5).timeout
-		if global_transform == last_transform:  # Still unchanged
-			_tween_outline_emission(0.0, 0.3, "hide")
+		if global_transform == last_transform:
+			if not locked:
+				outline.emission_energy_multiplier = 0.3

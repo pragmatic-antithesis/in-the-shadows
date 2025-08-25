@@ -19,23 +19,36 @@ const ROTATION_RANGES: Dictionary = {
 	"y": {"min": 1.6, "max": 1.8},
 	"z": {"min": 1.7, "max": 1.8}
 }
+
 const CENTER = Vector2(-0.17, -0.95)
-const TOLERANCE = 1.5
-const solved_position = Vector3(2.2, 9.7, -7.15)
-const solved_rotation = Vector3(-1.16, 1.25, 1.98)
+const TOLERANCE = 100.5
+const solved_position = Vector3(1.77, 9.42, -5.73)
+const solved_rotation = Vector3(1.30, 0.60, -2.3)
 
-#const solved_rotation = Vector3(1.2, 1.7, 1.75)
+const ANGLE_TOLERANCE: float = 0.05 #3 deg
+func modularize(coord: float) -> float:
+	if coord > PI - ANGLE_TOLERANCE:
+		print("I GOT CALLED AND AM BIGGER THAN PI", coord)
+		return -PI
+	if coord < -PI + ANGLE_TOLERANCE:
+		print("I GOT CALLED AND AM SMALLER THAN PI ", coord)
+		return -PI
+	return coord
 
-func check_piece_solution() -> void:
-	print("rotation: ", rotation)
-	if is_solved():
-		AudioPlayer.play_sfx("puzzle3")
+func check_piece_solution(mesh_position: Vector3, mesh_rotation: Vector3) -> void:
+	var normalized_rotation = Vector3(
+		modularize(mesh_rotation.x),
+		modularize(mesh_rotation.y),
+		modularize(mesh_rotation.z))
+	print("received position: ", mesh_position, " and rotation ", normalized_rotation)
+	if is_solved(mesh_position, normalized_rotation):
+		AudioPlayer.play_sfx("puzzle2")
 		piece_solved.emit(solved_position, solved_rotation)
 
-func is_solved() -> bool:
-	var pos_2d := Vector2(position.x, position.y)
+func is_solved(mesh_position: Vector3, mesh_rotation: Vector3) -> bool:
+	var pos_2d := Vector2(mesh_position.x, mesh_position.y)
 
-	return rotation.x >= ROTATION_RANGES["x"]["min"] and rotation.x <= ROTATION_RANGES["x"]["max"] \
-	and rotation.y >= ROTATION_RANGES["y"]["min"] and rotation.y <= ROTATION_RANGES["y"]["max"] \
-	and rotation.z >= ROTATION_RANGES["z"]["min"] and rotation.z <= ROTATION_RANGES["z"]["max"] \
-	and pos_2d.distance_to(CENTER) <= TOLERANCE
+	return mesh_rotation.x >= ROTATION_RANGES["x"]["min"] and mesh_rotation.x <= ROTATION_RANGES["x"]["max"] \
+	and mesh_rotation.y >= ROTATION_RANGES["y"]["min"] and mesh_rotation.y <= ROTATION_RANGES["y"]["max"] \
+	and mesh_rotation.z >= ROTATION_RANGES["z"]["min"] and mesh_rotation.z <= ROTATION_RANGES["z"]["max"] \
+	and pos_2d.distance_to(CENTER) < TOLERANCE
