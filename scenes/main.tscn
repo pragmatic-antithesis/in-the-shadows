@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://bebrhhrysqcj6" path="res://scripts/room.gd" id="1_eb6dy"]
 [ext_resource type="Shader" uid="uid://b3jnjdm0ud7wn" path="res://shaders/gui.gdshader" id="2_0wfyh"]
-[ext_resource type="Material" uid="uid://bq4x4y3jbyanl" path="res://shaders/floor_2.tres" id="2_eb6dy"]
+[ext_resource type="Material" uid="uid://c43ucf1wevx5g" path="res://shaders/floor_default.tres" id="2_eb6dy"]
 [ext_resource type="Script" uid="uid://blbkhgtq0rlci" path="res://scripts/gui.gd" id="2_sugp2"]
 [ext_resource type="Shader" uid="uid://yq7ognogbb5i" path="res://shaders/title.gdshader" id="3_tbgi4"]
 [ext_resource type="FontFile" uid="uid://crulpu8yy2h4d" path="res://assets/fonts/BigBlueTermPlusNerdFont-Regular.ttf" id="4_jyhfs"]
-[ext_resource type="Material" uid="uid://c652tc358hk31" path="res://shaders/wall_l_2.tres" id="4_trceg"]
+[ext_resource type="Material" uid="uid://4hkffm63bx03" path="res://shaders/wl_default.tres" id="4_trceg"]
 [ext_resource type="Material" uid="uid://dsr223wcmyjh6" path="res://shaders/ceiling.tres" id="4_ya4ey"]
-[ext_resource type="Material" uid="uid://d0723g6ga1l7e" path="res://shaders/wall_r_2.tres" id="5_a8y0u"]
+[ext_resource type="Material" uid="uid://7dgghk4jdd0v" path="res://shaders/wr_default.tres" id="5_a8y0u"]
 [ext_resource type="FontFile" uid="uid://d3mnch2k13qpl" path="res://assets/fonts/NeNe_WeNo_Shadow_HandWrite.ttf" id="5_tefeu"]
 [ext_resource type="FontFile" uid="uid://b3ky6pciaebo3" path="res://assets/fonts/SHADOWS ITALIC PERSONAL USE.ttf" id="6_o6xl0"]
 [ext_resource type="Script" uid="uid://bsoumcthvlirk" path="res://scripts/save_menu.gd" id="7_o6xl0"]
@@ -37,9 +37,9 @@ size = Vector3(24, 18, 1)
 shader = ExtResource("2_0wfyh")
 shader_parameter/base_color = Color(0, 0, 0, 0.85)
 shader_parameter/aspect_ratio = 0.5
-shader_parameter/radius = 0.1
-shader_parameter/strength = 0.5
-shader_parameter/radius_dist = 0.1
+shader_parameter/radius = 0.25
+shader_parameter/strength = 0.73
+shader_parameter/radius_dist = 0.25
 shader_parameter/u_mouse = Vector2(0.45, 0.44)
 shader_parameter/disable_darkening = false
 shader_parameter/dropdown_gradient = 0
@@ -248,11 +248,15 @@ spot_angle_attenuation = 0.499998
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38473, 8.0155, -1.52746)
+layers = 2
 light_color = Color(0.988197, 0.987569, 0.977052, 1)
 light_bake_mode = 1
-omni_range = 22.0
+light_cull_mask = 4294967293
+omni_range = 18.877
+omni_attenuation = 0.855
 
 [node name="GUI" type="Control" parent="."]
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

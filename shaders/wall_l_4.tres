@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://bgujj5nekpmca"]
+
+[ext_resource type="Texture2D" uid="uid://ms12h0hu1325" path="res://assets/textures/wall_l/Chip003_1K-JPG_Color.jpg" id="1_vppyi"]
+[ext_resource type="Texture2D" uid="uid://d0w7r0gsutgy8" path="res://assets/textures/wall_l/Chip003_1K-JPG_Metalness.jpg" id="2_7rnca"]
+[ext_resource type="Texture2D" uid="uid://c8hqo176shawb" path="res://assets/textures/wall_l/Chip003_1K-JPG_NormalGL.jpg" id="3_7m7d5"]
+[ext_resource type="Texture2D" uid="uid://n6dw2jdgq5tj" path="res://assets/textures/wall_l/Chip003_1K-JPG_Roughness.jpg" id="4_a13xq"]
+
+[resource]
+albedo_texture = ExtResource("1_vppyi")
+metallic = 1.0
+metallic_texture = ExtResource("2_7rnca")
+roughness_texture = ExtResource("4_a13xq")
+normal_enabled = true
+normal_texture = ExtResource("3_7m7d5")
+uv1_scale = Vector3(0.58, 0.58, 0.58)
+uv1_offset = Vector3(-0.05, 0.165, 0)

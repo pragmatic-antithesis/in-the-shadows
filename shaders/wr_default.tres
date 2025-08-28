@@ -1,13 +1,12 @@
 [gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://7dgghk4jdd0v"]
 
-[ext_resource type="Texture2D" uid="uid://c7rmw1iqgrpuh" path="res://assets/textures/wall_r/default/PaintedPlaster010_1K-JPG_Color.jpg" id="1_l8bk3"]
-[ext_resource type="Texture2D" uid="uid://bd0hs76ndbrtg" path="res://assets/textures/wall_r/default/PaintedPlaster010_1K-JPG_NormalGL.jpg" id="2_eu05p"]
-[ext_resource type="Texture2D" uid="uid://b2s8jrh6tqdqm" path="res://assets/textures/wall_r/default/PaintedPlaster010_1K-JPG_Roughness.jpg" id="3_gneye"]
+[ext_resource type="Texture2D" uid="uid://vso4b2qwqjks" path="res://assets/textures/wall_r/PaintedWood007A_1K-JPG_Color.jpg" id="1_l8bk3"]
+[ext_resource type="Texture2D" uid="uid://cxgf8rt42b08g" path="res://assets/textures/wall_r/PaintedWood007A_1K-JPG_NormalGL.jpg" id="2_eu05p"]
+[ext_resource type="Texture2D" uid="uid://boufo21dlmnal" path="res://assets/textures/wall_r/PaintedWood007A_1K-JPG_Roughness.jpg" id="3_gneye"]
 
 [resource]
 albedo_texture = ExtResource("1_l8bk3")
 roughness_texture = ExtResource("3_gneye")
 normal_enabled = true
-normal_scale = 3.0
 normal_texture = ExtResource("2_eu05p")
 uv1_scale = Vector3(1.9, 1.9, 1.9)
