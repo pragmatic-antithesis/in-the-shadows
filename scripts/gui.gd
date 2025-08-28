@@ -25,7 +25,7 @@ const MAX_OFFSET: float = 18.0
 #Buttons#
 enum LevelOption { CONTINUE, NEW, TEST, RETURNING }
 const MENU_START_SHADER_ALPHA: Vector2 = Vector2(0.085, 0.18)
-const MAX_LEVEL: int = 4
+const MAX_LEVEL: int = 5
 @onready var start_menu: VBoxContainer = $MenuCanvas/Buttons/StartMenu
 @onready var level_select: VBoxContainer = $MenuCanvas/Buttons/LevelSelect
 @onready var call_menu: Button = $MenuCanvas/Buttons/CallMenu
@@ -128,7 +128,7 @@ func _show_level_select(option: int) -> void:
 				else:
 					button.disabled = true
 	level_select.show()
-	menu_background.set_shader_parameter("rect_size", Vector2(0.085, 0.24))
+	menu_background.set_shader_parameter("rect_size", Vector2(0.085, 0.3))
 
 func _on_reload_pressed() -> void:
 	get_tree().reload_current_scene()
