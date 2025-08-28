@@ -1,15 +1,22 @@
-[gd_scene load_steps=9 format=4 uid="uid://baj0qmviex86t"]
+[gd_scene load_steps=12 format=4 uid="uid://baj0qmviex86t"]
 
 [ext_resource type="Script" uid="uid://8x8qt3op0wph" path="res://scripts/puzzle.gd" id="1_d7vh0"]
 [ext_resource type="Script" uid="uid://7xdxdls33pyc" path="res://scripts/base_puzzle.gd" id="1_voev6"]
 [ext_resource type="ArrayMesh" uid="uid://fcj8tus28p7k" path="res://assets/objs/tea_pot.obj" id="2_voev6"]
 [ext_resource type="Script" uid="uid://b3qgxjkwcaygn" path="res://scripts/puzzle1.gd" id="3_j46pd"]
+[ext_resource type="Texture2D" uid="uid://b0x531oax8mw7" path="res://assets/textures/puzzles/Porcelain001_1K-JPG_Color.jpg" id="4_b4bn3"]
 [ext_resource type="Material" uid="uid://cgr7jfp4pui31" path="res://shaders/highlight.tres" id="4_mjqgh"]
+[ext_resource type="Texture2D" uid="uid://cmemw5aq14q7i" path="res://assets/textures/puzzles/Porcelain001_1K-JPG_NormalGL.jpg" id="5_rih6e"]
+[ext_resource type="Texture2D" uid="uid://cavdnoo1m2l8b" path="res://assets/textures/puzzles/Porcelain001_1K-JPG_Roughness.jpg" id="6_8jut7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5ifmx"]
 size = Vector3(3.7, 2, 6.7)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3asjn"]
+albedo_texture = ExtResource("4_b4bn3")
+roughness_texture = ExtResource("6_8jut7")
+normal_enabled = true
+normal_texture = ExtResource("5_rih6e")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_3asjn"]
 _surfaces = [{

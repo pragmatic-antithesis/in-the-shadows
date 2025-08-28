@@ -13,9 +13,9 @@ func _ready() -> void:
 	)
 
 const ROTATION_RANGES: Dictionary = {
-	"x": {"min": -1.6, "max": -1.2},
-	"y": {"min": -1.7, "max": -1.3},
-	"z": {"min": 1.2, "max": 1.6},
+	"x": {"min": -1.7, "max": -1.0},
+	"y": {"min": -1.8, "max": -1.1},
+	"z": {"min": 1.1, "max": 1.7},
 }
 
 const CENTER = Vector2(1.81, 10.22)

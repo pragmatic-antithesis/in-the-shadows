@@ -1,15 +1,22 @@
-[gd_scene load_steps=9 format=4 uid="uid://qq3qmwtmftdk"]
+[gd_scene load_steps=12 format=4 uid="uid://qq3qmwtmftdk"]
 
 [ext_resource type="Script" uid="uid://7xdxdls33pyc" path="res://scripts/base_puzzle.gd" id="1_hmdak"]
 [ext_resource type="Script" uid="uid://8x8qt3op0wph" path="res://scripts/puzzle.gd" id="2_qdtor"]
 [ext_resource type="ArrayMesh" uid="uid://dd23hvc8ej0qw" path="res://assets/objs/bonuslevel.obj" id="3_ive8y"]
 [ext_resource type="Script" uid="uid://c75hcantyrrcs" path="res://scripts/puzzle5.gd" id="4_hmdak"]
+[ext_resource type="Texture2D" uid="uid://dubif8l1u06tv" path="res://assets/textures/puzzles/Leather038_1K-JPG_Color.jpg" id="4_s4ty1"]
+[ext_resource type="Texture2D" uid="uid://bfwxptvgit3m4" path="res://assets/textures/puzzles/Leather038_1K-JPG_NormalGL.jpg" id="5_a44np"]
 [ext_resource type="Material" uid="uid://cgr7jfp4pui31" path="res://shaders/highlight.tres" id="5_lwwyp"]
+[ext_resource type="Texture2D" uid="uid://dh835w0w2ba7w" path="res://assets/textures/puzzles/Leather038_1K-JPG_Roughness.jpg" id="6_365tq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5ifmx"]
 size = Vector3(4.2, 3, 5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3asjn"]
+albedo_texture = ExtResource("4_s4ty1")
+roughness_texture = ExtResource("6_365tq")
+normal_enabled = true
+normal_texture = ExtResource("5_a44np")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_hmdak"]
 _surfaces = [{

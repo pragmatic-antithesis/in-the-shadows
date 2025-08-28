@@ -1,15 +1,22 @@
-[gd_scene load_steps=9 format=4 uid="uid://bfaccga7wc38p"]
+[gd_scene load_steps=12 format=4 uid="uid://bfaccga7wc38p"]
 
 [ext_resource type="Script" uid="uid://7xdxdls33pyc" path="res://scripts/base_puzzle.gd" id="1_6e5t8"]
 [ext_resource type="Script" uid="uid://8x8qt3op0wph" path="res://scripts/puzzle.gd" id="1_7pooc"]
 [ext_resource type="ArrayMesh" uid="uid://wpecvx1trlvy" path="res://assets/objs/elephant.obj" id="2_ktcv2"]
 [ext_resource type="Script" uid="uid://dvfo2kgk3str2" path="res://scripts/puzzle2.gd" id="3_6e5t8"]
 [ext_resource type="Material" uid="uid://cgr7jfp4pui31" path="res://shaders/highlight.tres" id="4_cmli7"]
+[ext_resource type="Texture2D" uid="uid://b2lpc1n2uuf6e" path="res://assets/textures/puzzles/Asphalt025C_1K-JPG_Color.jpg" id="4_evfbg"]
+[ext_resource type="Texture2D" uid="uid://dkfpfn23i1d1a" path="res://assets/textures/puzzles/Asphalt025C_1K-JPG_NormalGL.jpg" id="5_gnfc5"]
+[ext_resource type="Texture2D" uid="uid://c5pi7wnfqkuix" path="res://assets/textures/puzzles/Asphalt025C_1K-JPG_Roughness.jpg" id="6_uxb0r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5ifmx"]
 size = Vector3(5.5, 6.5, 5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3asjn"]
+albedo_texture = ExtResource("4_evfbg")
+roughness_texture = ExtResource("6_uxb0r")
+normal_enabled = true
+normal_texture = ExtResource("5_gnfc5")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_6e5t8"]
 _surfaces = [{

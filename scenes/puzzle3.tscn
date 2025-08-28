@@ -1,17 +1,28 @@
-[gd_scene load_steps=13 format=4 uid="uid://bumailsg75opy"]
+[gd_scene load_steps=21 format=4 uid="uid://bumailsg75opy"]
 
 [ext_resource type="Script" uid="uid://7xdxdls33pyc" path="res://scripts/base_puzzle.gd" id="1_bgb7r"]
 [ext_resource type="Script" uid="uid://8x8qt3op0wph" path="res://scripts/puzzle.gd" id="2_3iget"]
 [ext_resource type="ArrayMesh" uid="uid://csk3xl5p8c8nj" path="res://assets/objs/globe-earth.obj" id="3_fk55t"]
+[ext_resource type="Texture2D" uid="uid://cfckc0h504qy" path="res://assets/textures/puzzles/Wood063_1K-JPG_Color.jpg" id="4_5iuxw"]
 [ext_resource type="Script" uid="uid://nryn2rqt0ffi" path="res://scripts/puzzle3a.gd" id="4_l5s0i"]
+[ext_resource type="Texture2D" uid="uid://bmqr7aft51wkb" path="res://assets/textures/puzzles/Wood063_1K-JPG_NormalGL.jpg" id="5_gekyh"]
 [ext_resource type="Material" uid="uid://cgr7jfp4pui31" path="res://shaders/highlight.tres" id="5_l5s0i"]
 [ext_resource type="ArrayMesh" uid="uid://cxvimqnmb7h7s" path="res://assets/objs/globe_base.obj" id="6_5e6b1"]
+[ext_resource type="Texture2D" uid="uid://luexe2pqgwyo" path="res://assets/textures/puzzles/Wood063_1K-JPG_Roughness.jpg" id="6_egn5e"]
 [ext_resource type="Script" uid="uid://cvut05mdue27s" path="res://scripts/puzzle3b.gd" id="7_5iuxw"]
+[ext_resource type="Texture2D" uid="uid://dqdjrklockh1j" path="res://assets/textures/puzzles/Metal008_1K-JPG_Color.jpg" id="10_cfhps"]
+[ext_resource type="Texture2D" uid="uid://cyoxee0ea8esy" path="res://assets/textures/puzzles/Metal008_1K-JPG_Metalness.jpg" id="11_4jysb"]
+[ext_resource type="Texture2D" uid="uid://rsfnctk43him" path="res://assets/textures/puzzles/Metal008_1K-JPG_NormalGL.jpg" id="12_so3uy"]
+[ext_resource type="Texture2D" uid="uid://ulm25nrxdjy" path="res://assets/textures/puzzles/Metal008_1K-JPG_Roughness.jpg" id="13_v2ux6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5ifmx"]
 size = Vector3(3.5, 3, 3.8)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3asjn"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hd3a1"]
+albedo_texture = ExtResource("4_5iuxw")
+roughness_texture = ExtResource("6_egn5e")
+normal_enabled = true
+normal_texture = ExtResource("5_gekyh")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_5e6b1"]
 _surfaces = [{
@@ -27,6 +38,14 @@ _surfaces = [{
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5e6b1"]
 size = Vector3(3.7, 2, 5.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mv5is"]
+albedo_texture = ExtResource("10_cfhps")
+metallic = 1.0
+metallic_texture = ExtResource("11_4jysb")
+roughness_texture = ExtResource("13_v2ux6")
+normal_enabled = true
+normal_texture = ExtResource("12_so3uy")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_fk55t"]
 _surfaces = [{
@@ -56,7 +75,7 @@ transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 gi_mode = 2
 mesh = ExtResource("3_fk55t")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_3asjn")
+surface_material_override/0 = SubResource("StandardMaterial3D_hd3a1")
 script = ExtResource("4_l5s0i")
 
 [node name="Outline" type="MeshInstance3D" parent="MainMesh/Mesh"]
@@ -78,7 +97,7 @@ transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 gi_mode = 2
 mesh = ExtResource("6_5e6b1")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_3asjn")
+surface_material_override/0 = SubResource("StandardMaterial3D_mv5is")
 script = ExtResource("7_5iuxw")
 
 [node name="Outline" type="MeshInstance3D" parent="MainMesh2/Mesh"]
