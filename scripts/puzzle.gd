@@ -33,10 +33,12 @@ func _input(event: InputEvent) -> void:
 	_tween_outline_emission(1.42, 0.5, "show")
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			rotate_object_local(Vector3.FORWARD, deg_to_rad(5.0))  # Rotate clockwise
-			get_viewport().set_input_as_handled()
+			if get_parent().level_id != 1:
+				rotate_object_local(Vector3.FORWARD, deg_to_rad(5.0))
+				get_viewport().set_input_as_handled()
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			rotate_object_local(Vector3.FORWARD, deg_to_rad(-5.0))  # Rotate counte
+			if get_parent().level_id != 1:
+				rotate_object_local(Vector3.FORWARD, deg_to_rad(-5.0))
 	if Input.is_mouse_button_pressed(control_click):
 		if Input.is_action_pressed("vertical_rotate"):
 			Input.set_default_cursor_shape(Input.CURSOR_VSIZE)

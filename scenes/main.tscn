@@ -25,6 +25,7 @@ background_mode = 1
 sky = SubResource("Sky_goddp")
 ambient_light_source = 1
 tonemap_mode = 2
+fog_light_energy = 0.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_o5qli"]
 size = Vector3(20, 1, 25)

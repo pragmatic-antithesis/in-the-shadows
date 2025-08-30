@@ -10,3 +10,4 @@ roughness_texture = ExtResource("3_gneye")
 normal_enabled = true
 normal_texture = ExtResource("2_eu05p")
 uv1_scale = Vector3(1.9, 1.9, 1.9)
+uv1_offset = Vector3(0, -0.505, 0)
