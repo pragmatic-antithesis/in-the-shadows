@@ -143,8 +143,10 @@ func _on_game_title_gui_input(event: InputEvent) -> void:
 		title_screen.material.set_shader_parameter("mouse_pos", uv_mouse)
 
 func _on_puzzle_solved(level_id: int) -> void:
+	var new_level: int = min(level_id + 1, MAX_LEVEL)
 	if not test_mode:
-		save_menu.update_progress(min(level_id + 1, MAX_LEVEL))
+		if active_profile.puzzles_unlocked < new_level:
+			save_menu.update_progress(new_level)
 	else:
 		test_mode = false
 	congrats_message.text = "You solved the puzzle, %s!" % active_profile.player_name

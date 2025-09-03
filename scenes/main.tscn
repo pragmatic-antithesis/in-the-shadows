@@ -140,6 +140,10 @@ Button/styles/normal = SubResource("StyleBoxFlat_tipki")
 Button/styles/pressed = SubResource("StyleBoxFlat_85g3d")
 CodeEdit/constants/outline_size = -1
 GraphFrameTitleLabel/colors/font_outline_color = Color(0, 0, 0, 1)
+TooltipLabel/colors/font_color = Color(0.0519712, 0.0519709, 0.0519709, 1)
+TooltipLabel/colors/font_outline_color = Color(1, 1, 1, 1)
+TooltipLabel/constants/outline_size = 36
+TooltipLabel/font_sizes/font_size = 24
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tefeu"]
 shader = ExtResource("3_tbgi4")
@@ -344,6 +348,8 @@ grow_vertical = 2
 
 [node name="Puzzle1" type="Button" parent="GUI/MenuCanvas/Buttons/LevelSelect"]
 layout_mode = 2
+tooltip_text = "Rotate with 
+click + drag"
 mouse_default_cursor_shape = 2
 theme = SubResource("Theme_o6xl0")
 theme_override_font_sizes/font_size = 36
@@ -352,6 +358,9 @@ icon_alignment = 1
 
 [node name="Puzzle2" type="Button" parent="GUI/MenuCanvas/Buttons/LevelSelect"]
 layout_mode = 2
+tooltip_text = "Additional rotations
+click + ctrl
+click + wheel"
 mouse_default_cursor_shape = 2
 theme = SubResource("Theme_o6xl0")
 theme_override_font_sizes/font_size = 36
@@ -361,6 +370,8 @@ icon_alignment = 1
 
 [node name="Puzzle3" type="Button" parent="GUI/MenuCanvas/Buttons/LevelSelect"]
 layout_mode = 2
+tooltip_text = "Movement with
+click + shift + drag"
 mouse_default_cursor_shape = 2
 theme = SubResource("Theme_o6xl0")
 theme_override_font_sizes/font_size = 36
